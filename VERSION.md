@@ -1,10 +1,10 @@
 # Version Control
 
-## Current Version: v1.0.0
+## Current Version: v1.1.0
 
-**Release Date**: December 21, 2025
-**Status**: Foundation Complete
-**Milestone**: [Milestone 1 - Foundation & Security Setup](ROADMAP.md#milestone-1-foundation--security-setup--completed)
+**Release Date**: December 21, 2024
+**Status**: CREATE2 & Key Management Complete
+**Milestone**: [Milestone 2 - Deterministic Deployment & Key Management](ROADMAP.md#milestone-2-deterministic-deployment--key-management--in-progress)
 
 ---
 
@@ -62,30 +62,76 @@
 
 ---
 
-### v1.1.0 - CREATE2 & Key Management (Target: Q1 2025)
+### v1.1.0 - CREATE2 & Key Management (Released: December 21, 2024)
 
-**Status**: 🔄 In Progress
-**Milestone**: [Milestone 2 - Deterministic Deployment & Key Management](ROADMAP.md#milestone-2-deterministic-deployment--key-management--in-progress)
+**Status**: ✅ Released
+**Milestone**: [Milestone 2 - Deterministic Deployment & Key Management](ROADMAP.md#milestone-2-deterministic-deployment--key-management)
 
-#### Planned Features
-- CREATE2 factory contract for deterministic deployments
-- Hardware wallet integration
-- Multisig infrastructure setup
-- Key management protocols
-- Emergency key rotation procedures
+#### Features
+- **CREATE2 Factory Contract**: Deterministic contract deployments across all chains
+  - CREATE2Factory.sol with salt generation
+  - Address pre-computation utilities
+  - Cross-chain address consistency
+  - Bytecode verification tools
+
+- **Hardware Wallet Integration**: Optional hardware wallet support for secure deployments
+  - Full Ledger support (Nano S Plus, Nano X)
+  - Full Trezor support (Model T, One)
+  - Flexible signer factory (software OR hardware wallets)
+  - Air-gapped signing workflows
+  - Migration path from software to hardware wallets
+
+- **Multisig Infrastructure**: Three-level Gnosis Safe multisig hierarchy
+  - Level 2: Admin Multisig (2-of-3) - Contract configuration
+  - Level 3: Treasury Multisig (3-of-5) - Fund management
+  - Level 4: Emergency Multisig (1-of-3) - Fast response
+  - Fillable environment variables for signer configuration
+  - Deployment and testing utilities
+
+- **Comprehensive Documentation**: 12 operational guides
+  - 5 hardware wallet guides (50+ pages)
+  - 5 operational procedure guides
+  - 2 track completion reports
+  - Complete M2 milestone summary
 
 #### Security Enhancements
 - Deterministic deployment verification
-- Multi-level key hierarchy
-- Key ceremony protocols
-- Geographic distribution of signers
+- Multi-level key hierarchy (4 levels)
+- Key ceremony protocols documented
+- Geographic distribution guidelines
+- Hardware wallet security best practices
+- Multisig threshold enforcement
 
 #### Development Status
-- [ ] CREATE2 factory contract designed
-- [ ] Deployment scripts updated
-- [ ] Hardware wallet integration tested
-- [ ] Multisig configurations documented
-- [ ] Key ceremony procedures drafted
+- ✅ CREATE2 factory contract implemented and tested
+- ✅ Deployment scripts updated for CREATE2
+- ✅ Hardware wallet integration complete (Ledger & Trezor)
+- ✅ Multisig configurations documented and implemented
+- ✅ Key ceremony procedures drafted and reviewed
+- ✅ Co-signer onboarding program (4-week testnet practice)
+
+#### New Scripts
+- `npm run deploy:hw:base-sepolia` - Hardware wallet deployment (testnet)
+- `npm run deploy:hw:base` - Hardware wallet deployment (Base mainnet)
+- `npm run deploy:hw:ethereum` - Hardware wallet deployment (Ethereum)
+- `npm run multisig:deploy:base-sepolia` - Deploy multisig (testnet)
+- `npm run multisig:deploy:base` - Deploy multisig (Base mainnet)
+- `npm run multisig:deploy:ethereum` - Deploy multisig (Ethereum)
+- `npm run multisig:test` - Test deployed multisig
+
+#### Dependencies Added
+- `@ledgerhq/hw-app-eth@^6.35.0` - Ledger integration
+- `@ledgerhq/hw-transport-node-hid@^6.28.0` - Ledger USB communication
+- `@nomicfoundation/hardhat-ledger@^1.0.3` - Hardhat Ledger plugin
+- `trezor-connect@^9.1.0` - Trezor integration
+
+#### Breaking Changes
+- None (additive features only)
+
+#### Known Limitations
+- Hardware wallet testing requires physical devices
+- Multisig deployment requires signer coordination
+- Testnet validation pending actual signer participation
 
 ---
 
