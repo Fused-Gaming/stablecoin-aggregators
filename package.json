@@ -10,12 +10,18 @@
     "deploy:base-sepolia": "hardhat run scripts/deploy.ts --network baseSepolia",
     "deploy:base": "hardhat run scripts/deploy.ts --network base",
     "deploy:ethereum": "hardhat run scripts/deploy.ts --network ethereum",
+    "deploy:hw:base-sepolia": "hardhat run scripts/deploy-hardware-wallet.ts --network baseSepolia",
+    "deploy:hw:base": "hardhat run scripts/deploy-hardware-wallet.ts --network base",
+    "deploy:hw:ethereum": "hardhat run scripts/deploy-hardware-wallet.ts --network ethereum",
     "verify": "hardhat run scripts/verify.ts",
     "coverage": "hardhat coverage",
     "gas-report": "REPORT_GAS=true hardhat test",
     "clean": "hardhat clean"
   },
   "devDependencies": {
+    "@ledgerhq/hw-app-eth": "^6.35.0",
+    "@ledgerhq/hw-transport-node-hid": "^6.28.0",
+    "@nomicfoundation/hardhat-ledger": "^1.0.3",
     "@nomicfoundation/hardhat-toolbox": "^4.0.0",
     "@nomicfoundation/hardhat-verify": "^2.0.0",
     "@openzeppelin/hardhat-upgrades": "^3.0.0",
@@ -25,6 +31,7 @@
     "hardhat": "^2.19.0",
     "hardhat-gas-reporter": "^1.0.10",
     "solidity-coverage": "^0.8.5",
+    "trezor-connect": "^9.1.0",
     "typescript": "^5.0.0"
   },
   "dependencies": {
