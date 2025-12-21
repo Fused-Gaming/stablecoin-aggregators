@@ -2,8 +2,7 @@
 
 Smart contracts for cross-chain stablecoin routing with x402 micropayments.
 
-https://402.vln.gg/
-
+**Version**: v1.0.0 | [Roadmap](ROADMAP.md) | [Changelog](CHANGELOG.md) | [Version Info](VERSION.md)
 
 **Built by Fused-Gaming**
 
@@ -190,15 +189,31 @@ const tx = await router.swapViaSocket(
 await tx.wait();
 ```
 
-## Roadmap
+## Project Status & Roadmap
 
-- [x] Phase 1: Core contracts (Router, FeeCollector, Treasury)
-- [x] Phase 2: Socket integration
-- [ ] Phase 3: LayerZero direct integration
-- [ ] Phase 4: TON bridge support
-- [ ] Phase 5: Monad mainnet launch
-- [ ] Phase 6: Security audit
-- [ ] Phase 7: Governance token
+**Current Milestone**: Foundation & Security Setup ✅ Completed
+**Next Milestone**: CREATE2 & Key Management 🔄 In Progress
+
+See [ROADMAP.md](ROADMAP.md) for detailed milestone planning including:
+- CREATE2 deterministic deployment strategy
+- Multi-level key management hierarchy
+- Security protocols and key ceremonies
+- Testnet validation procedures
+- Professional security audit plans
+- Mainnet deployment roadmap
+- Governance and decentralization path
+
+**Quick Milestones**:
+- ✅ M1: Foundation & Security Setup (v1.0.0) - Completed
+- 🔄 M2: CREATE2 & Key Management (v1.1.0) - In Progress
+- ⏳ M3: Testnet Deployment (v1.2.0) - Q1 2025
+- ⏳ M4: Security Audit (v1.3.0) - Q1 2025
+- ⏳ M5: Base Mainnet Launch (v2.0.0) - Q2 2025
+- ⏳ M6: Ethereum Mainnet (v2.1.0) - Q2 2025
+- ⏳ M7: Multi-Chain Expansion (v3.0.0) - Q3 2025
+- ⏳ M8: Governance & DAO (v4.0.0) - Q4 2025
+
+[View Full Roadmap →](ROADMAP.md)
 
 ## License
 
@@ -215,10 +230,28 @@ Audit planned for Q1 2025 after initial deployment and testing.
 - GitHub: [Fused-Gaming/stablecoin-aggregators](https://github.com/Fused-Gaming/stablecoin-aggregators)
 - Organization: [Fused-Gaming](https://github.com/Fused-Gaming)
 
+## Documentation
+
+Comprehensive documentation is available:
+- [ROADMAP.md](ROADMAP.md) - Detailed development roadmap with security protocols
+- [VERSION.md](VERSION.md) - Version tracking and release history
+- [CHANGELOG.md](CHANGELOG.md) - Detailed changelog and progress tracking
+- [docs/overview.md](docs/overview.md) - System overview
+- [docs/architecture.md](docs/architecture.md) - Contract architecture
+- [docs/deployment.md](docs/deployment.md) - Deployment guide
+- [docs/api-reference.md](docs/api-reference.md) - API documentation
+- [docs/security.md](docs/security.md) - Security features and best practices
+
 ## Contributing
 
-Contributions welcome! Please open an issue or PR.
+Contributions welcome! Please:
+1. Review the [ROADMAP.md](ROADMAP.md) for current priorities
+2. Check [CHANGELOG.md](CHANGELOG.md) for recent updates
+3. Open an issue to discuss major changes
+4. Submit a PR with clear description
 
 ## Disclaimer
 
 This software is provided "as is" without warranty. Use at your own risk. Always test on testnet first.
+
+⚠️ **Security Note**: Contracts are not yet audited. See [ROADMAP.md](ROADMAP.md) Milestone 4 for audit timeline.
