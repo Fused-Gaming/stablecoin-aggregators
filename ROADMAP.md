@@ -229,11 +229,11 @@ This roadmap outlines the development milestones for the Stablecoin Aggregator p
 - [ ] Upgrade path analysis
 
 ### Audit Partners (Shortlist)
-- Trail of Bits
-- OpenZeppelin
-- Consensys Diligence
-- Certora
-- ChainSecurity
+- [ ] Trail of Bits
+- [ ] OpenZeppelin
+- [ ] Consensys Diligence
+- [ ] Certora
+- [ ] ChainSecurity
 
 ### Bug Bounty Program
 - **Platform**: Immunefi or HackerOne
@@ -246,11 +246,11 @@ This roadmap outlines the development milestones for the Stablecoin Aggregator p
 - **Out of Scope**: Known issues, testnet contracts
 
 ### Success Criteria
-- Zero critical findings unresolved
-- All high findings remediated
-- Audit report published
-- Bug bounty program active
-- Community review period completed
+- [ ] Zero critical findings unresolved
+- [ ] All high findings remediated
+- [ ] Audit report published
+- [ ] Bug bounty program active
+- [ ] Community review period completed
 
 ---
 
