@@ -1,5 +1,6 @@
 import { HardhatUserConfig } from "hardhat/config";
 import "@nomicfoundation/hardhat-toolbox";
+import "@nomicfoundation/hardhat-ledger";
 import "@openzeppelin/hardhat-upgrades";
 import "hardhat-gas-reporter";
 import "solidity-coverage";
@@ -29,21 +30,33 @@ const config: HardhatUserConfig = {
       accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
       chainId: 8453,
       gasPrice: 1000000000, // 1 gwei
+      ledgerAccounts: process.env.USE_HARDWARE_WALLET === "true"
+        ? [process.env.LEDGER_ADDRESS || ""]
+        : [],
     },
     baseSepolia: {
       url: "https://sepolia.base.org",
       accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
       chainId: 84532,
+      ledgerAccounts: process.env.USE_HARDWARE_WALLET === "true"
+        ? [process.env.LEDGER_ADDRESS || ""]
+        : [],
     },
     ethereum: {
       url: process.env.ETH_RPC_URL || "https://eth.llamarpc.com",
       accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
       chainId: 1,
+      ledgerAccounts: process.env.USE_HARDWARE_WALLET === "true"
+        ? [process.env.LEDGER_ADDRESS || ""]
+        : [],
     },
     sepolia: {
       url: "https://rpc.sepolia.org",
       accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
       chainId: 11155111,
+      ledgerAccounts: process.env.USE_HARDWARE_WALLET === "true"
+        ? [process.env.LEDGER_ADDRESS || ""]
+        : [],
     },
   },
   etherscan: {
