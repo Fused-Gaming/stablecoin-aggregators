@@ -17,6 +17,8 @@
     "multisig:deploy:base": "hardhat run scripts/deploy-multisig.ts --network base",
     "multisig:deploy:ethereum": "hardhat run scripts/deploy-multisig.ts --network ethereum",
     "multisig:test": "hardhat run scripts/test-multisig.ts",
+    "test:level1": "hardhat run scripts/test-level1-workflow.ts --network hardhat",
+    "test:level1:sepolia": "hardhat run scripts/test-level1-workflow.ts --network baseSepolia",
     "verify": "hardhat run scripts/verify.ts",
     "coverage": "hardhat coverage",
     "gas-report": "REPORT_GAS=true hardhat test",
@@ -40,6 +42,6 @@
   },
   "dependencies": {
     "@openzeppelin/contracts": "^5.0.1",
-    "dotenv": "^16.3.1"
+    "dotenv": "^16.6.1"
   }
 }
