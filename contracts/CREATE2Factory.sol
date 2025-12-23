@@ -47,7 +47,7 @@ contract CREATE2Factory is Ownable2Step {
 
     // ============ Errors ============
 
-    error DeploymentFailed();
+    error Create2DeploymentFailed();
     error SaltAlreadyUsed(bytes32 salt);
     error InvalidBytecode();
     error AddressMismatch(address expected, address actual);
@@ -95,7 +95,7 @@ contract CREATE2Factory is Ownable2Step {
 
         // Check deployment success
         if (deployedAddress == address(0)) {
-            revert DeploymentFailed();
+            revert Create2DeploymentFailed();
         }
 
         // Verify address matches expected
@@ -152,7 +152,7 @@ contract CREATE2Factory is Ownable2Step {
 
         // Check deployment success
         if (deployedAddress == address(0)) {
-            revert DeploymentFailed();
+            revert Create2DeploymentFailed();
         }
 
         // Mark salt as used and contract as deployed
