@@ -157,14 +157,14 @@ contract Router402 is Ownable2Step, ReentrancyGuard, Pausable {
     constructor(
         address _treasury,
         uint256 _feeBps
-    ) {
+    ) Ownable(msg.sender) {
         if (_treasury == address(0)) revert InvalidAddress(_treasury);
         if (_feeBps > MAX_FEE_BPS) revert FeeTooHigh(_feeBps);
-        
+
         treasury = _treasury;
         feeBps = _feeBps;
         maxDailyVolume = 100_000e6; // $100k default
-        
+
         emit TreasuryUpdated(address(0), _treasury);
         emit FeeUpdated(0, _feeBps);
     }
@@ -217,7 +217,7 @@ contract Router402 is Ownable2Step, ReentrancyGuard, Pausable {
         }
         
         // Approve bridge
-        IERC20(params.token).safeApprove(params.bridge, amountOut);
+        IERC20(params.token).forceApprove(params.bridge, amountOut);
         
         // Execute bridge call
         (bool success, bytes memory returnData) = params.bridge.call(params.bridgeData);
@@ -305,7 +305,7 @@ contract Router402 is Ownable2Step, ReentrancyGuard, Pausable {
         }
         
         // Approve Socket
-        IERC20(token).safeApprove(socketRouter, amountOut);
+        IERC20(token).forceApprove(socketRouter, amountOut);
         
         // Execute Socket swap
         (bool success, bytes memory returnData) = socketRouter.call(socketData);

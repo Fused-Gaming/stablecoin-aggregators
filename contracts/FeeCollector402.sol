@@ -41,10 +41,10 @@ contract FeeCollector402 is Ownable {
         address _treasury,
         address _feeToken,
         uint256 _baseFee
-    ) {
+    ) Ownable(msg.sender) {
         require(_treasury != address(0), "Invalid treasury");
         require(_feeToken != address(0), "Invalid token");
-        
+
         treasury = _treasury;
         feeToken = _feeToken;
         baseFee = _baseFee;

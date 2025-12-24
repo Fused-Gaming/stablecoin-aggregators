@@ -296,11 +296,11 @@ contract CREATE2Factory is Ownable2Step {
      * @param contractAddress The address to check
      * @return hasCode True if contract exists at address
      */
-    function hasCode(address contractAddress) public view returns (bool hasCode) {
+    function hasCode(address contractAddress) public view returns (bool) {
         uint256 size;
         assembly {
             size := extcodesize(contractAddress)
         }
-        hasCode = size > 0;
+        return size > 0;
     }
 }
