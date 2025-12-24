@@ -1,0 +1,296 @@
+#!/usr/bin/env node
+
+const fs = require('fs');
+const path = require('path');
+
+/**
+ * Auto-Documentation Bot - Error Handler
+ *
+ * Centralized error handling and reporting for the auto-documentation workflow.
+ * Creates detailed error reports and optionally posts to PR/issues.
+ */
+
+// Configuration
+const config = {
+  logsDir: '.github/logs',
+  outputDir: '.github/generated-docs',
+  parseStatus: process.env.PARSE_STATUS,
+  generateStatus: process.env.GENERATE_STATUS,
+  commentStatus: process.env.COMMENT_STATUS,
+  token: process.env.GITHUB_TOKEN,
+  prNumber: process.env.PR_NUMBER,
+  repo: process.env.GITHUB_REPOSITORY || 'Fused-Gaming/stablecoin-aggregators',
+};
+
+/**
+ * Ensure log directory exists
+ */
+function ensureLogDir() {
+  if (!fs.existsSync(config.logsDir)) {
+    fs.mkdirSync(config.logsDir, { recursive: true });
+  }
+}
+
+/**
+ * Read error log file
+ */
+function readErrorLog() {
+  try {
+    const logFile = path.join(config.logsDir, 'errors.log');
+    if (fs.existsSync(logFile)) {
+      return fs.readFileSync(logFile, 'utf-8');
+    }
+    return 'No error log available';
+  } catch (error) {
+    return `Failed to read error log: ${error.message}`;
+  }
+}
+
+/**
+ * Generate error report
+ */
+function generateErrorReport() {
+  const timestamp = new Date().toISOString();
+  const errorLog = readErrorLog();
+
+  let report = '';
+  report += `# 🚨 Auto-Documentation Workflow Error Report\n\n`;
+  report += `**Generated:** ${timestamp}\n\n`;
+  report += `---\n\n`;
+
+  // Step statuses
+  report += `## Step Status\n\n`;
+  report += `| Step | Status |\n`;
+  report += `|------|--------|\n`;
+  report += `| Parse Commits | ${getStatusEmoji(config.parseStatus)} ${config.parseStatus || 'unknown'} |\n`;
+  report += `| Generate Docs | ${getStatusEmoji(config.generateStatus)} ${config.generateStatus || 'unknown'} |\n`;
+  report += `| Post Comment | ${getStatusEmoji(config.commentStatus)} ${config.commentStatus || 'unknown'} |\n`;
+  report += `\n`;
+
+  // Error details
+  report += `## Error Details\n\n`;
+
+  if (config.parseStatus === 'failure') {
+    report += `### ❌ Parse Commits Failed\n\n`;
+    report += `The commit parsing step failed. This usually means:\n\n`;
+    report += `- Git commands failed (invalid refs, missing commits)\n`;
+    report += `- Commit messages could not be parsed\n`;
+    report += `- File system issues (permissions, disk space)\n\n`;
+    report += `**Resolution:** Check the error log below for specific error messages.\n\n`;
+  }
+
+  if (config.generateStatus === 'failure') {
+    report += `### ❌ Generate Documentation Failed\n\n`;
+    report += `The documentation generation step failed. This usually means:\n\n`;
+    report += `- Commit data file is missing or corrupted\n`;
+    report += `- Markdown generation encountered invalid data\n`;
+    report += `- File system issues when writing output\n\n`;
+    report += `**Resolution:** Check that the parse step completed successfully and examine the error log.\n\n`;
+  }
+
+  if (config.commentStatus === 'failure') {
+    report += `### ❌ Post Comment Failed\n\n`;
+    report += `The comment posting step failed. This usually means:\n\n`;
+    report += `- GitHub API authentication issues (check GITHUB_TOKEN)\n`;
+    report += `- PR number is invalid or missing\n`;
+    report += `- Network connectivity issues\n`;
+    report += `- API rate limiting\n\n`;
+    report += `**Resolution:** Verify GitHub token permissions and PR number.\n\n`;
+  }
+
+  // Error log
+  report += `## Error Log\n\n`;
+  report += `\`\`\`\n`;
+  report += errorLog;
+  report += `\n\`\`\`\n\n`;
+
+  // Troubleshooting
+  report += `## 🔧 Troubleshooting Steps\n\n`;
+  report += `1. **Check Workflow Logs**: Review the full GitHub Actions logs for detailed error messages\n`;
+  report += `2. **Verify Git History**: Ensure the base and head refs are valid\n`;
+  report += `3. **Check Permissions**: Verify GITHUB_TOKEN has proper permissions\n`;
+  report += `4. **Review Commits**: Ensure commit messages follow conventional format (optional but recommended)\n`;
+  report += `5. **Retry Workflow**: Sometimes transient issues resolve on retry\n\n`;
+
+  // Common issues
+  report += `## 🐛 Common Issues\n\n`;
+  report += `### "unknown revision or path not in the working tree"\n`;
+  report += `- **Cause:** Invalid git refs (BASE_REF or HEAD_REF)\n`;
+  report += `- **Fix:** Check that refs exist and are valid\n\n`;
+
+  report += `### "GITHUB_TOKEN authentication failed"\n`;
+  report += `- **Cause:** Invalid or insufficient token permissions\n`;
+  report += `- **Fix:** Verify token has \`contents: write\` and \`pull-requests: write\` permissions\n\n`;
+
+  report += `### "No commits found in range"\n`;
+  report += `- **Cause:** Empty commit range or new branch\n`;
+  report += `- **Fix:** This is informational, not an error\n\n`;
+
+  // Footer
+  report += `---\n\n`;
+  report += `*Generated by Auto-Documentation Bot Error Handler 🤖*\n`;
+
+  return report;
+}
+
+/**
+ * Get emoji for status
+ */
+function getStatusEmoji(status) {
+  switch (status) {
+    case 'success': return '✅';
+    case 'failure': return '❌';
+    case 'skipped': return '⏭️';
+    default: return '❓';
+  }
+}
+
+/**
+ * Save error report
+ */
+function saveErrorReport(report) {
+  try {
+    ensureLogDir();
+
+    const reportFile = path.join(config.logsDir, 'error-report.md');
+    fs.writeFileSync(reportFile, report);
+
+    console.log(`✅ Error report saved to ${reportFile}`);
+    return reportFile;
+  } catch (error) {
+    console.error('❌ Failed to save error report:', error);
+    return null;
+  }
+}
+
+/**
+ * Post error comment to PR (optional)
+ */
+async function postErrorComment(report) {
+  try {
+    // Only post if PR number is available
+    if (!config.prNumber || !config.token) {
+      console.log('ℹ️ Skipping error comment (no PR number or token)');
+      return;
+    }
+
+    console.log(`💬 Posting error comment to PR #${config.prNumber}...`);
+
+    // Create compact error comment
+    const comment = `## 🚨 Auto-Documentation Workflow Error
+
+The auto-documentation workflow encountered errors and could not complete.
+
+**Status:**
+- Parse Commits: ${getStatusEmoji(config.parseStatus)} ${config.parseStatus}
+- Generate Docs: ${getStatusEmoji(config.generateStatus)} ${config.generateStatus}
+- Post Comment: ${getStatusEmoji(config.commentStatus)} ${config.commentStatus}
+
+**What to do:**
+1. Check the [workflow logs](../../actions) for detailed error messages
+2. Review the troubleshooting steps in the error report artifact
+3. Re-run the workflow if needed
+
+<details>
+<summary>View Error Log</summary>
+
+\`\`\`
+${readErrorLog().slice(0, 2000)}
+\`\`\`
+
+${readErrorLog().length > 2000 ? '*Error log truncated - see workflow artifacts for full log*' : ''}
+
+</details>
+
+---
+<sub>🤖 Auto-generated by [auto-documentation workflow](../../actions/workflows/auto-document.yml)</sub>
+<!-- auto-documentation-bot-error -->
+`;
+
+    // Post to GitHub
+    const [owner, repo] = config.repo.split('/');
+    const url = `https://api.github.com/repos/${owner}/${repo}/issues/${config.prNumber}/comments`;
+
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Authorization': `token ${config.token}`,
+        'Accept': 'application/vnd.github.v3+json',
+        'Content-Type': 'application/json',
+        'User-Agent': 'auto-documentation-bot',
+      },
+      body: JSON.stringify({ body: comment }),
+    });
+
+    if (response.ok) {
+      console.log('✅ Error comment posted to PR');
+    } else {
+      const errorText = await response.text();
+      console.error(`❌ Failed to post error comment (${response.status}):`, errorText);
+    }
+  } catch (error) {
+    console.error('❌ Failed to post error comment:', error);
+    // Don't throw - error posting is optional
+  }
+}
+
+/**
+ * Print summary to console
+ */
+function printSummary() {
+  console.log('\n📊 Error Summary:');
+  console.log('==================');
+  console.log(`Parse Commits:  ${config.parseStatus || 'unknown'}`);
+  console.log(`Generate Docs:  ${config.generateStatus || 'unknown'}`);
+  console.log(`Post Comment:   ${config.commentStatus || 'unknown'}`);
+  console.log('');
+
+  const failureCount = [
+    config.parseStatus,
+    config.generateStatus,
+    config.commentStatus
+  ].filter(s => s === 'failure').length;
+
+  console.log(`Total Failures: ${failureCount}`);
+  console.log('');
+}
+
+/**
+ * Main execution
+ */
+async function main() {
+  try {
+    console.log('🤖 Auto-Documentation Bot - Error Handler');
+    console.log('==========================================\n');
+
+    // Generate error report
+    const report = generateErrorReport();
+
+    // Save error report
+    const reportFile = saveErrorReport(report);
+
+    // Print summary
+    printSummary();
+
+    // Optionally post error comment to PR
+    await postErrorComment(report);
+
+    // Save to GitHub Actions summary
+    if (process.env.GITHUB_STEP_SUMMARY) {
+      fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, report);
+      console.log('✅ Error details added to workflow summary');
+    }
+
+    console.log('\n✅ Error handling complete');
+    console.log(`📄 Full error report: ${reportFile}`);
+
+    // Exit with error code to mark workflow as failed
+    process.exit(1);
+  } catch (error) {
+    console.error('\n❌ Fatal error in error handler:', error);
+    process.exit(1);
+  }
+}
+
+// Run
+main();

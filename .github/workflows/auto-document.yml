@@ -1,0 +1,111 @@
+name: Auto-Document Commits
+
+on:
+  push:
+    branches:
+      - 'claude/**'
+      - 'feat/**'
+      - 'docs/**'
+  pull_request:
+    types: [opened, synchronize, reopened]
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Branch to document'
+        required: false
+        default: ''
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+jobs:
+  auto-document:
+    name: Generate Documentation from Commits
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Fetch all history for commit analysis
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: |
+          npm install @actions/core @actions/github conventional-commits-parser
+        continue-on-error: false
+
+      - name: Parse commits and generate documentation
+        id: parse
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          BASE_REF: ${{ github.event.pull_request.base.ref || github.event.before }}
+          HEAD_REF: ${{ github.sha }}
+          BRANCH_NAME: ${{ github.ref_name }}
+        run: |
+          node .github/scripts/parse-commits.js
+        continue-on-error: true
+
+      - name: Generate documentation summary
+        id: generate
+        if: steps.parse.outcome == 'success'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          COMMITS_DATA: ${{ steps.parse.outputs.commits_data }}
+        run: |
+          node .github/scripts/generate-docs.js
+        continue-on-error: true
+
+      - name: Post PR comment
+        id: comment
+        if: github.event_name == 'pull_request' && steps.generate.outcome == 'success'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          DOCUMENTATION: ${{ steps.generate.outputs.documentation }}
+        run: |
+          node .github/scripts/post-comment.js
+        continue-on-error: true
+
+      - name: Handle errors
+        if: steps.parse.outcome == 'failure' || steps.generate.outcome == 'failure' || steps.comment.outcome == 'failure'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PARSE_STATUS: ${{ steps.parse.outcome }}
+          GENERATE_STATUS: ${{ steps.generate.outcome }}
+          COMMENT_STATUS: ${{ steps.comment.outcome }}
+        run: |
+          node .github/scripts/error-handler.js
+
+      - name: Upload documentation artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: commit-documentation-${{ github.sha }}
+          path: |
+            .github/generated-docs/*.md
+            .github/logs/*.log
+          retention-days: 30
+
+      - name: Summary
+        if: always()
+        run: |
+          echo "## Auto-Documentation Workflow Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- **Branch:** ${{ github.ref_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Commit:** ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Parse Status:** ${{ steps.parse.outcome }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Generate Status:** ${{ steps.generate.outcome }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Comment Status:** ${{ steps.comment.outcome }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          if [ -f ".github/generated-docs/summary.md" ]; then
+            cat .github/generated-docs/summary.md >> $GITHUB_STEP_SUMMARY
+          fi
