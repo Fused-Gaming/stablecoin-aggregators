@@ -706,6 +706,189 @@ Version Release Checklist:
 
 ---
 
+## 🔒 PRE-COMMIT CHECKLIST (CRITICAL)
+
+**ALWAYS complete this checklist before committing code, especially for deployed applications**
+
+### Core Documentation Files (REQUIRED)
+
+- [ ] **VERSION.md**
+  - Current version number matches reality
+  - Release date is current
+  - New version section added with all changes
+  - Last Updated date refreshed
+
+- [ ] **CHANGELOG.md**
+  - Version header added with correct date
+  - All changes documented under proper categories (Added/Fixed/Changed/Removed/Security)
+  - Migration notes included if breaking changes
+  - References to PRs/issues included
+
+- [ ] **README.md**
+  - Version badge updated
+  - Feature list reflects current capabilities
+  - Links are valid and not broken
+  - Installation instructions are current
+
+- [ ] **docs.json**
+  - Version number updated
+  - New documentation files referenced
+  - All paths are correct
+  - Web platform URLs are current
+
+### Web Application Files (402-vln-gg)
+
+- [ ] **package.json**
+  - Version number updated (follows semver)
+  - All dependencies are in correct sections (dependencies vs devDependencies)
+  - Scripts are functional and documented
+  - Name and description are accurate
+
+- [ ] **pnpm-lock.yaml** OR **package-lock.json**
+  - Lock file regenerated after dependency changes
+  - Run `pnpm install` or `npm install` to update
+  - Committed alongside package.json changes
+
+- [ ] **public/robots.txt**
+  - Admin routes blocked appropriately
+  - AI scrapers handled correctly
+  - Sitemap referenced
+  - Updated if routes changed
+
+- [ ] **public/sitemap.xml**
+  - All public routes included
+  - Admin/sensitive routes excluded
+  - Priorities set correctly
+  - URLs use correct subdomain (admin.vln.gg, 402.vln.gg, etc.)
+
+- [ ] **public/manifest.json** (if exists)
+  - App name and description current
+  - Icons referenced correctly
+  - Theme colors set appropriately
+  - URLs point to correct domains
+
+- [ ] **src/app/layout.tsx** (or equivalent)
+  - Metadata (title, description) is current
+  - Analytics integration present (@vercel/analytics)
+  - Fonts and global styles loaded
+  - Proper HTML structure
+
+### Smart Contract Files
+
+- [ ] **Contracts compiled successfully**
+  - Run `npm run compile`
+  - Zero errors, zero warnings
+  - TypeScript types regenerated
+
+- [ ] **Tests passing**
+  - Run `npm test`
+  - All tests green
+  - No flaky tests
+  - Coverage >90% if possible
+
+### Additional Critical Files
+
+- [ ] **ROADMAP.md**
+  - Milestone statuses updated
+  - Current version referenced
+  - Timeline adjusted if needed
+  - Completed items marked
+
+- [ ] **QUICKSTART_DEPLOYMENT.md**
+  - Instructions still accurate
+  - Environment variables current
+  - Network addresses correct
+  - Commands tested and working
+
+- [ ] **CLAUDE.md** (this file)
+  - Architecture changes documented
+  - New patterns explained
+  - Troubleshooting updated
+  - Examples current
+
+### Deployment-Specific Checks
+
+#### For Web Applications:
+
+- [ ] Environment variables documented in `.env.example`
+- [ ] All secrets in .env but NOT in .env.example (use placeholders)
+- [ ] Vercel configuration (vercel.json) updated if needed
+- [ ] Next.js config (next.config.ts) has correct settings
+- [ ] Security headers configured properly
+- [ ] API routes tested and functional
+
+#### For Smart Contracts:
+
+- [ ] Deployment scripts updated
+- [ ] Constructor arguments documented
+- [ ] Network configurations current
+- [ ] Gas optimizations applied
+- [ ] Security patterns followed
+
+### Git Hygiene
+
+- [ ] Branch name is descriptive
+- [ ] Commit message follows convention (feat/fix/docs/chore)
+- [ ] No secrets in commit history
+- [ ] .gitignore excludes sensitive files
+- [ ] Large files not committed (use .gitignore)
+
+### Pre-Push Verification
+
+```bash
+# Run this before pushing
+npm run compile  # Smart contracts
+npm test         # All tests
+npm run coverage # Coverage check
+npm run lint     # Linting
+git status       # Check what's staged
+```
+
+### Quick Command Reference
+
+```bash
+# Update lock files
+cd 402-vln-gg && pnpm install  # or npm install
+
+# Regenerate contract types
+npm run compile
+
+# Run full test suite
+npm test
+
+# Check documentation is up-to-date
+git diff VERSION.md CHANGELOG.md README.md docs.json
+```
+
+### Why This Matters
+
+- **User Trust**: Accurate documentation = professional project
+- **Team Efficiency**: Current docs = less confusion
+- **SEO & Discovery**: Updated metadata = better search visibility
+- **Deployment Safety**: Correct configs = no production errors
+- **Version Control**: Proper versioning = clear history
+- **Compliance**: Lock files = reproducible builds
+
+### When to Skip This Checklist
+
+- **NEVER** - This checklist is ALWAYS required before commits to master/main
+- For quick feature branch commits, you may defer documentation updates until PR
+- For hotfixes, focus on VERSION.md and CHANGELOG.md minimum
+
+### Automated Checks (Future)
+
+Consider adding pre-commit hooks:
+
+```bash
+# .husky/pre-commit (future implementation)
+npm run lint
+npm run compile
+npm test
+# Check documentation files are updated
+```
+
+---
+
 **Note to Future Developers**: This guide is maintained alongside the codebase. When making significant architectural changes, please update the relevant sections. Keep it practical and example-driven.
 
 **Built with ❤️ by Fused-Gaming using Claude Code**
