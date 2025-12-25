@@ -17,6 +17,9 @@ export const metadata: Metadata = {
   title: "Admin Dashboard - vln.gg",
   description: "Secure admin dashboard for managing stablecoin aggregator smart contracts",
   manifest: "/manifest.json",
+};
+
+export const viewport = {
   themeColor: "#000000",
 };
 
