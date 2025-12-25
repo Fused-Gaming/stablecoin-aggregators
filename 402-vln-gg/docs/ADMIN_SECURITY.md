@@ -2,14 +2,16 @@
 
 **Security Level**: CRITICAL
 **Access**: Restricted to authorized administrators only
-**Location**: `/admin` route within 402.vln.gg Next.js application
+**Location**: Dedicated subdomain `admin.402.vln.gg`
 **Last Updated**: 2025-12-24
 
 ---
 
 ## Overview
 
-The admin dashboard is a **secure, restricted section** of the 402.vln.gg Next.js application for managing stablecoin aggregator smart contracts. This document outlines the multi-layered security architecture.
+The admin dashboard is a **secure, dedicated subdomain** (`admin.402.vln.gg`) for managing stablecoin aggregator smart contracts. This document outlines the multi-layered security architecture.
+
+**Subdomain Separation**: The admin dashboard is intentionally deployed on a separate subdomain from the public-facing applications to provide additional isolation and security.
 
 ---
 
@@ -185,17 +187,21 @@ View all administrative actions with:
 
 ## Admin Dashboard Routes
 
+**Base URL**: `https://admin.402.vln.gg`
+
 ```
-/admin                    → Login page (if not authenticated)
-/admin/dashboard          → Overview & quick stats
-/admin/contracts          → Contract management
-/admin/contracts/router   → Router402 configuration
-/admin/contracts/fee-collector → FeeCollector402 config
-/admin/deployments        → Deployment status & addresses
-/admin/audit-logs         → Audit trail viewer
-/admin/emergency          → Emergency controls (pause, etc.)
-/admin/settings           → Admin account settings (MFA, etc.)
+/                         → Login page (if not authenticated)
+/dashboard                → Overview & quick stats
+/contracts                → Contract management
+/contracts/router         → Router402 configuration
+/contracts/fee-collector  → FeeCollector402 config
+/deployments              → Deployment status & addresses
+/audit-logs               → Audit trail viewer
+/emergency                → Emergency controls (pause, etc.)
+/settings                 → Admin account settings (MFA, etc.)
 ```
+
+**API Routes**: `https://admin.402.vln.gg/api/*`
 
 ---
 

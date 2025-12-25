@@ -1,14 +1,66 @@
 # Version Control
 
-## Current Version: v1.1.1
+## Current Version: v1.2.0
 
 **Release Date**: December 24, 2025
-**Status**: OpenZeppelin v5 Migration & Developer Tooling
+**Status**: Admin Dashboard Architecture & Subdomain Infrastructure
 **Milestone**: [Milestone 2 - Deterministic Deployment & Key Management](ROADMAP.md#milestone-2-deterministic-deployment--key-management--complete)
 
 ---
 
 ## Version History
+
+### v1.2.0 - Admin Dashboard & Subdomain Architecture (December 24, 2025)
+
+**Status**: ✅ Released
+
+#### Features
+- **Admin Dashboard Security Architecture** ([ADMIN_SECURITY.md](402-vln-gg/docs/ADMIN_SECURITY.md))
+  - Multi-layered security (environment auth, MFA, session management, bot protection)
+  - 7 documented administrative flows
+  - Permission matrix for all operations
+  - Multi-admin approval for critical operations
+  - Deployed on dedicated subdomain: `admin.402.vln.gg`
+
+- **Subdomain Architecture** ([VERCEL_DEPLOYMENT.md](402-vln-gg/docs/VERCEL_DEPLOYMENT.md))
+  - `admin.402.vln.gg` - Secure admin dashboard (deployed)
+  - `402.vln.gg` - x402 Payment Gateway (planned M5-M7)
+  - `manage.402.vln.gg` - Internal management platform (planned M3-M4)
+  - `swap.402.vln.gg` - Stablecoin aggregator UI (planned M8-M9)
+
+- **Vercel Analytics Integration**
+  - Installed `@vercel/analytics` package
+  - Analytics component added to root layout
+  - Real-time traffic and performance monitoring
+
+- **Documentation Organization**
+  - Reorganized docs into structured folders:
+    - `docs/web-platform/` - Platform architecture
+    - `docs/milestones/` - Milestone completion reports
+    - `docs/tracks/` - Track completion documentation
+    - `docs/specifications/` - Protocol specifications (x402)
+  - Updated `docs.json` with new structure
+
+#### Security
+- Bot protection via `robots.txt` (blocks admin routes, AI scrapers)
+- SEO isolation via `sitemap.xml` (excludes admin routes)
+- Dedicated subdomain for admin dashboard (isolation)
+- Environment-based authentication strategy
+- IP whitelisting and rate limiting architecture
+- JWT token management (15min access, 7day refresh)
+- TOTP-based MFA requirement
+
+#### Deployment
+- Successfully deployed to Vercel (https://402-vln-gg.vercel.app)
+- Custom domain configuration documented
+- Production-ready security headers
+- HTTPS enforcement
+- Environment variable management guide
+
+#### Documentation
+- **New**: [VERCEL_DEPLOYMENT.md](402-vln-gg/docs/VERCEL_DEPLOYMENT.md) - Complete deployment guide
+- **Updated**: [ADMIN_SECURITY.md](402-vln-gg/docs/ADMIN_SECURITY.md) - Reflects subdomain architecture
+- **Updated**: [docs.json](docs.json) - New documentation structure
 
 ### v1.0.0 - Foundation Release (December 21, 2025)
 
