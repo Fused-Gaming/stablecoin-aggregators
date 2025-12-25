@@ -57,10 +57,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 #### Subdomain Architecture
 - **VERCEL_DEPLOYMENT.md**: Complete deployment guide for 4-subdomain ecosystem
-  - `admin.402.vln.gg` - Secure admin dashboard (deployed)
+  - `admin.vln.gg` - Secure admin dashboard (deployed)
   - `402.vln.gg` - x402 Payment Gateway (planned M5-M7)
-  - `manage.402.vln.gg` - Internal management platform (planned M3-M4)
-  - `swap.402.vln.gg` - Stablecoin aggregator UI (planned M8-M9)
+  - `manage.vln.gg` - Internal management platform (planned M3-M4)
+  - `swap.vln.gg` - Stablecoin aggregator UI (planned M8-M9)
 
 - **Subdomain Separation**: Admin dashboard intentionally isolated on separate subdomain for security
 
@@ -103,14 +103,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - **ADMIN_SECURITY.md**: Updated to reflect dedicated subdomain architecture
-  - Changed from `/admin` route to `admin.402.vln.gg` subdomain
+  - Changed from `/admin` route to `admin.vln.gg` subdomain
   - Updated all route references (removed `/admin` prefix)
   - Added subdomain separation rationale
 
 ### Deployment
 - ✅ Deployed to Vercel: https://402-vln-gg.vercel.app
 - ✅ Vercel project linked to GitHub repository
-- ⏳ Custom domain `admin.402.vln.gg` configuration pending
+- ⏳ Custom domain `admin.vln.gg` configuration pending
 - Production-ready security headers documented
 - Environment variable management guide created
 

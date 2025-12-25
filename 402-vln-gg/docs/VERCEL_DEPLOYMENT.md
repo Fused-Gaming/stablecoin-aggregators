@@ -12,16 +12,16 @@
 The 402.vln.gg ecosystem consists of 4 distinct Next.js applications, each deployed to a separate Vercel project with its own subdomain.
 
 ```
-402.vln.gg (root domain)
-├── admin.402.vln.gg    → Admin Dashboard (CURRENT)
-├── manage.402.vln.gg   → Internal Management Platform (FUTURE)
-├── swap.402.vln.gg     → Stablecoin Aggregator UI (FUTURE)
-└── 402.vln.gg          → x402 Payment Gateway (FUTURE)
+vln.gg (root domain)
+├── admin.vln.gg        → Admin Dashboard (CURRENT)
+├── 402.vln.gg          → x402 Payment Gateway (FUTURE)
+├── manage.vln.gg       → Internal Management Platform (FUTURE)
+└── swap.vln.gg         → Stablecoin Aggregator UI (FUTURE)
 ```
 
 ---
 
-## 1. admin.402.vln.gg (Admin Dashboard) ✅
+## 1. admin.vln.gg (Admin Dashboard) ✅
 
 ### Purpose
 Secure admin dashboard for managing deployed smart contracts (Router402, FeeCollector402, Treasury402).
@@ -69,11 +69,11 @@ ADMIN_LOCKOUT_DURATION=3600000
 
 # Production Mode
 NODE_ENV=production
-NEXT_PUBLIC_APP_URL=https://admin.402.vln.gg
+NEXT_PUBLIC_APP_URL=https://admin.vln.gg
 ```
 
 **Custom Domain**:
-- Primary: `admin.402.vln.gg`
+- Primary: `admin.vln.gg`
 
 **Security Headers** (via `next.config.ts`):
 - X-Frame-Options: DENY
@@ -94,7 +94,7 @@ vercel link --scope team-4eckd
 vercel --prod
 
 # Set custom domain (in Vercel dashboard)
-# Domains → admin.402.vln.gg → Add
+# Domains → admin.vln.gg → Add
 ```
 
 ### Access Control
@@ -172,7 +172,7 @@ NEXT_PUBLIC_APP_URL=https://402.vln.gg
 
 ---
 
-## 3. manage.402.vln.gg (Internal Management) 🔮
+## 3. manage.vln.gg (Internal Management) 🔮
 
 ### Purpose
 Internal team workflow coordination, deployment tracking, and key management platform.
@@ -212,11 +212,11 @@ GITHUB_REPO=stablecoin-aggregators
 
 # Production
 NODE_ENV=production
-NEXT_PUBLIC_APP_URL=https://manage.402.vln.gg
+NEXT_PUBLIC_APP_URL=https://manage.vln.gg
 ```
 
 **Custom Domain**:
-- Primary: `manage.402.vln.gg`
+- Primary: `manage.vln.gg`
 
 ### Features
 - Kanban board for milestone tracking
@@ -227,7 +227,7 @@ NEXT_PUBLIC_APP_URL=https://manage.402.vln.gg
 
 ---
 
-## 4. swap.402.vln.gg (Stablecoin Aggregator UI) 🔮
+## 4. swap.vln.gg (Stablecoin Aggregator UI) 🔮
 
 ### Purpose
 User-facing interface for cross-chain stablecoin swaps using Router402 contracts.
@@ -277,11 +277,11 @@ NEXT_PUBLIC_ANALYTICS_ID=<google_analytics_id>
 
 # Production
 NODE_ENV=production
-NEXT_PUBLIC_APP_URL=https://swap.402.vln.gg
+NEXT_PUBLIC_APP_URL=https://swap.vln.gg
 ```
 
 **Custom Domain**:
-- Primary: `swap.402.vln.gg`
+- Primary: `swap.vln.gg`
 
 ### Features
 - Stablecoin swap interface
@@ -351,7 +351,7 @@ vercel env add ADMIN_JWT_SECRET production
 
 ### DNS Setup (via Domain Registrar)
 
-For custom domain `admin.402.vln.gg`:
+For custom domain `admin.vln.gg`:
 
 **DNS Records**:
 ```
@@ -364,7 +364,7 @@ TTL: 3600
 ### Vercel Domain Setup
 
 1. Navigate to Project Settings → Domains
-2. Add Custom Domain: `admin.402.vln.gg`
+2. Add Custom Domain: `admin.vln.gg`
 3. Verify DNS configuration
 4. Enable HTTPS (automatic via Let's Encrypt)
 5. Set as Production Domain
@@ -413,7 +413,7 @@ TTL: 3600
 
 ## Deployment Checklist
 
-### admin.402.vln.gg (CURRENT)
+### admin.vln.gg (CURRENT)
 - [x] Security architecture documented
 - [x] `robots.txt` and `sitemap.xml` created
 - [ ] `.env.example` created with all required variables
@@ -422,7 +422,7 @@ TTL: 3600
 - [ ] MFA integration completed
 - [ ] Vercel project created
 - [ ] Environment variables set in Vercel
-- [ ] Custom domain `admin.402.vln.gg` configured
+- [ ] Custom domain `admin.vln.gg` configured
 - [ ] Production deployment successful
 - [ ] Security testing completed
 
@@ -463,7 +463,7 @@ TTL: 3600
 
 **Issue**: Domain not resolving
 - **Solution**: Check DNS propagation (can take up to 48 hours)
-- **Verify**: `dig admin.402.vln.gg` or use https://dnschecker.org
+- **Verify**: `dig admin.vln.gg` or use https://dnschecker.org
 
 **Issue**: Environment variables not loading
 - **Solution**: Ensure variables are set for correct environment (Production/Preview/Development)
@@ -483,7 +483,7 @@ TTL: 3600
 
 ### Vercel Pricing (Team Plan - $20/month per member)
 
-**admin.402.vln.gg**:
+**admin.vln.gg**:
 - Traffic: Low (internal use only)
 - Build minutes: ~100/month
 - Estimated cost: Included in Team plan
@@ -493,12 +493,12 @@ TTL: 3600
 - Build minutes: ~200/month
 - Estimated cost: $20-50/month (Pro plan recommended)
 
-**manage.402.vln.gg**:
+**manage.vln.gg**:
 - Traffic: Low (team use only)
 - Build minutes: ~100/month
 - Estimated cost: Included in Team plan
 
-**swap.402.vln.gg**:
+**swap.vln.gg**:
 - Traffic: Medium (user-facing)
 - Build minutes: ~150/month
 - Estimated cost: Included in Team plan
@@ -510,11 +510,11 @@ TTL: 3600
 ## Next Steps
 
 1. ✅ Complete admin dashboard implementation
-2. Configure `admin.402.vln.gg` custom domain in Vercel
+2. Configure `admin.vln.gg` custom domain in Vercel
 3. Set all environment variables for production
 4. Deploy admin dashboard to production
 5. Test admin authentication flow
-6. Begin work on manage.402.vln.gg (M3-M4)
+6. Begin work on manage.vln.gg (M3-M4)
 7. Plan 402.vln.gg payment gateway architecture (M5-M7)
 
 ---

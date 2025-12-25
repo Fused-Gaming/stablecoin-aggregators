@@ -4,10 +4,10 @@
   "description": "Smart contracts for cross-chain stablecoin routing with x402 micropayments",
   "repository": "Fused-Gaming/stablecoin-aggregators",
   "web-platform": {
-    "admin": "https://admin.402.vln.gg",
+    "admin": "https://admin.vln.gg",
     "gateway": "https://402.vln.gg",
-    "manage": "https://manage.402.vln.gg",
-    "swap": "https://swap.402.vln.gg",
+    "manage": "https://manage.vln.gg",
+    "swap": "https://swap.vln.gg",
     "vercel-deployment-guide": "402-vln-gg/docs/VERCEL_DEPLOYMENT.md"
   },
   "documentation": {
@@ -44,7 +44,7 @@
   },
   "analytics": {
     "vercel-analytics": true,
-    "enabled-on": ["admin.402.vln.gg"]
+    "enabled-on": ["admin.vln.gg"]
   },
   "contracts": {
     "Router402": {

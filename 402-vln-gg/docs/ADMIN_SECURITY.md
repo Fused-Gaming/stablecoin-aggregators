@@ -2,14 +2,14 @@
 
 **Security Level**: CRITICAL
 **Access**: Restricted to authorized administrators only
-**Location**: Dedicated subdomain `admin.402.vln.gg`
+**Location**: Dedicated subdomain `admin.vln.gg`
 **Last Updated**: 2025-12-24
 
 ---
 
 ## Overview
 
-The admin dashboard is a **secure, dedicated subdomain** (`admin.402.vln.gg`) for managing stablecoin aggregator smart contracts. This document outlines the multi-layered security architecture.
+The admin dashboard is a **secure, dedicated subdomain** (`admin.vln.gg`) for managing stablecoin aggregator smart contracts. This document outlines the multi-layered security architecture.
 
 **Subdomain Separation**: The admin dashboard is intentionally deployed on a separate subdomain from the public-facing applications to provide additional isolation and security.
 
@@ -187,7 +187,7 @@ View all administrative actions with:
 
 ## Admin Dashboard Routes
 
-**Base URL**: `https://admin.402.vln.gg`
+**Base URL**: `https://admin.vln.gg`
 
 ```
 /                         → Login page (if not authenticated)
@@ -201,7 +201,7 @@ View all administrative actions with:
 /settings                 → Admin account settings (MFA, etc.)
 ```
 
-**API Routes**: `https://admin.402.vln.gg/api/*`
+**API Routes**: `https://admin.vln.gg/api/*`
 
 ---
 

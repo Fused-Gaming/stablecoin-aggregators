@@ -20,13 +20,13 @@
   - 7 documented administrative flows
   - Permission matrix for all operations
   - Multi-admin approval for critical operations
-  - Deployed on dedicated subdomain: `admin.402.vln.gg`
+  - Deployed on dedicated subdomain: `admin.vln.gg`
 
 - **Subdomain Architecture** ([VERCEL_DEPLOYMENT.md](402-vln-gg/docs/VERCEL_DEPLOYMENT.md))
-  - `admin.402.vln.gg` - Secure admin dashboard (deployed)
+  - `admin.vln.gg` - Secure admin dashboard (deployed)
   - `402.vln.gg` - x402 Payment Gateway (planned M5-M7)
-  - `manage.402.vln.gg` - Internal management platform (planned M3-M4)
-  - `swap.402.vln.gg` - Stablecoin aggregator UI (planned M8-M9)
+  - `manage.vln.gg` - Internal management platform (planned M3-M4)
+  - `swap.vln.gg` - Stablecoin aggregator UI (planned M8-M9)
 
 - **Vercel Analytics Integration**
   - Installed `@vercel/analytics` package

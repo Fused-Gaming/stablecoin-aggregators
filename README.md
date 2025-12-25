@@ -6,7 +6,7 @@ Smart contracts for cross-chain stablecoin routing with x402 micropayments.
 
 **🚀 [Quickstart Deployment Guide](QUICKSTART_DEPLOYMENT.md)** - Deploy to Base Sepolia in 15 minutes
 
-**🔐 [Admin Dashboard](https://admin.402.vln.gg)** - Secure contract management (restricted access)
+**🔐 [Admin Dashboard](https://admin.vln.gg)** - Secure contract management (restricted access)
 
 **Built by Fused-Gaming**
 
@@ -34,10 +34,10 @@ This repository contains production-ready smart contracts for routing stablecoin
 - ✅ OpenZeppelin v5 security patterns
 
 ### Web Platform
-- ✅ **admin.402.vln.gg** - Secure admin dashboard for contract management
+- ✅ **admin.vln.gg** - Secure admin dashboard for contract management
 - 🔮 **402.vln.gg** - x402 Payment Gateway (HTTP 402 protocol) - Planned M5-M7
-- 🔮 **manage.402.vln.gg** - Internal management platform - Planned M3-M4
-- 🔮 **swap.402.vln.gg** - Stablecoin swap UI - Planned M8-M9
+- 🔮 **manage.vln.gg** - Internal management platform - Planned M3-M4
+- 🔮 **swap.vln.gg** - Stablecoin swap UI - Planned M8-M9
 
 ### Security & Operations
 - ✅ Multi-layered admin security (environment auth, MFA, session management)

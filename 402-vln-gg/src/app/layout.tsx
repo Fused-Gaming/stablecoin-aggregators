@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Admin Dashboard - 402.vln.gg",
+  title: "Admin Dashboard - vln.gg",
   description: "Secure admin dashboard for managing stablecoin aggregator smart contracts",
 };
 
