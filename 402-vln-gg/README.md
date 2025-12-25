@@ -1,36 +1,78 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Admin Dashboard - vln.gg
 
-## Getting Started
+**Secure admin dashboard for managing stablecoin aggregator smart contracts**
 
-First, run the development server:
+Part of the [Stablecoin Aggregators](https://github.com/Fused-Gaming/stablecoin-aggregators) project.
+
+## Deployment
+
+- **Production**: [https://admin.vln.gg](https://admin.vln.gg)
+- **Staging**: [https://402-vln-gg.vercel.app](https://402-vln-gg.vercel.app)
+
+## Features
+
+- Multi-layered security architecture
+- Multi-factor authentication (MFA)
+- Multi-admin approval workflows
+- Real-time contract monitoring
+- Vercel Analytics integration
+- Progressive Web App (PWA) support
+
+## Documentation
+
+- [Security Architecture](docs/ADMIN_SECURITY.md)
+- [Vercel Deployment Guide](docs/VERCEL_DEPLOYMENT.md)
+- [Main Project Documentation](../README.md)
+
+## Development
 
 ```bash
+# Install dependencies
+npm install
+
+# Run development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+# Build for production
+npm run build
+
+# Start production server
+npm start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Stack
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Framework**: Next.js 16.1.0 (App Router)
+- **React**: 19.2.3
+- **TypeScript**: 5.x
+- **Styling**: Tailwind CSS 4.x
+- **Web3**: wagmi 3.x + viem 2.x
+- **Database**: Prisma 7.x (PostgreSQL)
+- **Analytics**: Vercel Analytics
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Subdomain Architecture
 
-## Learn More
+This admin dashboard is part of a 4-subdomain ecosystem:
 
-To learn more about Next.js, take a look at the following resources:
+1. **admin.vln.gg** - Admin Dashboard (THIS APP)
+2. **402.vln.gg** - x402 Payment Gateway (Planned M5-M7)
+3. **manage.vln.gg** - Internal Management (Planned M3-M4)
+4. **swap.vln.gg** - Stablecoin Swap UI (Planned M8-M9)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Security
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Environment-based authentication
+- IP whitelisting support
+- Rate limiting
+- TOTP-based MFA
+- JWT token management
+- Security headers (CSP, HSTS, X-Frame-Options)
+- Bot protection (robots.txt)
 
-## Deploy on Vercel
+## License
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+MIT - see [LICENSE](../LICENSE)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Built by
+
+[Fused-Gaming](https://github.com/Fused-Gaming) using [Claude Code](https://claude.com/claude-code)
