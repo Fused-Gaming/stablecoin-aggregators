@@ -8,12 +8,31 @@
     "developer-guide": "CLAUDE.md",
     "overview": "docs/overview.md",
     "architecture": "docs/architecture.md",
-    "deployment": "docs/deployment.md",
+    "deployment": "docs/DEPLOYMENT.md",
     "api": "docs/api-reference.md",
     "security": "docs/security.md",
     "level1-testing": "docs/LEVEL1_TESTING_GUIDE.md",
     "create2-deployment": "docs/CREATE2_DEPLOYMENT.md",
-    "hardware-wallet": "docs/hardware-wallet-setup.md"
+    "hardware-wallet": "docs/hardware-wallet-setup.md",
+    "web-platform": {
+      "architecture": "docs/web-platform/PLATFORM_ARCHITECTURE.md",
+      "roadmap": "docs/web-platform/DEVELOPMENT_ROADMAP.md",
+      "discrepancy-analysis": "docs/web-platform/DISCREPANCY_ANALYSIS.md",
+      "setup-guide": "docs/web-platform/SETUP_GUIDE.md"
+    },
+    "milestones": {
+      "m2-parallel-development": "docs/milestones/M2_PARALLEL_DEVELOPMENT.md"
+    },
+    "tracks": {
+      "track1-completion": "docs/tracks/TRACK1_README.md",
+      "track2-completion": "docs/tracks/TRACK2_README.md"
+    },
+    "specifications": {
+      "x402-protocol": "docs/specifications/x402.md"
+    },
+    "admin": {
+      "security-architecture": "402-vln-gg/docs/ADMIN_SECURITY.md"
+    }
   },
   "contracts": {
     "Router402": {
