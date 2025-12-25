@@ -2,7 +2,7 @@
 
 Smart contracts for cross-chain stablecoin routing with x402 micropayments.
 
-**Version**: v1.0.0 | [Roadmap](ROADMAP.md) | [Changelog](CHANGELOG.md) | [Version Info](VERSION.md)
+**Version**: v1.1.1 | [Roadmap](ROADMAP.md) | [Changelog](CHANGELOG.md) | [Version Info](VERSION.md)
 
 **Built by Fused-Gaming**
 

@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-**Current Version**: v1.1.0 (see [VERSION.md](VERSION.md))
+**Current Version**: v1.1.1 (see [VERSION.md](VERSION.md))
 **Roadmap Progress**: See [ROADMAP.md](ROADMAP.md) for milestone tracking
 
 ---
@@ -27,7 +27,92 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-## [1.1.0] - 2024-12-21
+## [1.1.1] - 2025-12-24
+
+**Milestone**: Milestone 2 Maintenance & Developer Tooling ✅
+
+### Added
+
+#### Developer Documentation
+- **CLAUDE.md**: Comprehensive developer guide for future contributors
+  - Complete project architecture overview
+  - Key technical decisions with rationale (OpenZeppelin v5, CREATE2, x402, fees)
+  - Development workflow and git conventions
+  - Common tasks with code examples
+  - Troubleshooting guide for compilation errors
+  - Integration points (frontend, bridges, hardware wallets)
+  - Security patterns and testing strategy
+  - Deployment procedures (testnet & mainnet)
+
+#### GitHub Actions
+- **action.yml**: Moved Telegram notification action to correct location
+  - Fixed workflow validation errors
+  - Proper repo root location for action definition
+
+### Fixed
+
+#### OpenZeppelin v5 Compatibility
+- **FeeCollector402.sol**: Added `Ownable(msg.sender)` to constructor (line 44)
+  - Resolves: "No arguments passed to the base constructor" compilation error
+
+- **Router402.sol**: Multiple OpenZeppelin v5 fixes
+  - Added `Ownable(msg.sender)` to constructor (line 160)
+  - Replaced deprecated `safeApprove()` with `forceApprove()` (lines 220, 308)
+  - Resolves: "Member 'safeApprove' not found" compilation error
+
+- **CREATE2Factory.sol**: Fixed variable shadowing warning
+  - Changed `hasCode()` return declaration to avoid shadowing (line 299)
+  - Changed from `returns (bool hasCode)` to `returns (bool)`
+
+#### Error Naming
+- **CREATE2Factory.sol**: Renamed error to avoid event name conflicts
+  - `DeploymentFailed` → `Create2DeploymentFailed`
+  - Prevents potential naming collision with events
+
+### Changed
+
+#### Dependencies
+- Updated to OpenZeppelin Contracts v5.x
+- Regenerated package-lock.json (2,716 changes)
+- Regenerated pnpm-lock.yaml (5,682 new entries)
+
+#### Branch Management
+- Merged PR #29: OpenZeppelin v5 compatibility fixes
+- Closed PR #21: Stale setup milestone branch (changes superseded)
+- Deleted 3 remote branches:
+  - `docs/m2-track2-procedures` (merged)
+  - `claude/setup-m2-milestone-iP7gk` (stale)
+  - `claude/hardware-wallet-cosigners-AHfuM` (merged)
+
+### Development
+
+#### Compilation
+- ✅ All contracts now compile successfully with OpenZeppelin v5
+- ✅ All TypeScript typings regenerated (54 types for 15 artifacts)
+- ✅ Zero compilation warnings or errors
+
+#### Testing
+- All existing tests remain passing
+- No breaking changes to contract interfaces
+
+### Migration Notes
+
+For developers upgrading from v1.1.0 to v1.1.1:
+- No code changes required
+- Contracts remain backward compatible
+- If extending contracts, use `Ownable(initialOwner)` pattern
+- Replace any usage of `safeApprove()` with `forceApprove()`
+
+### Security
+
+No security vulnerabilities fixed in this release. All changes are:
+- Compilation compatibility updates
+- Developer tooling improvements
+- Documentation enhancements
+
+---
+
+## [1.1.0] - 2025-12-21
 
 **Milestone**: [Milestone 2 - Deterministic Deployment & Key Management](ROADMAP.md#milestone-2-deterministic-deployment--key-management) ✅
 
@@ -316,7 +401,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-## [1.0.0] - 2024-12-21
+## [1.0.0] - 2025-12-21
 
 **Milestone**: [Milestone 1 - Foundation & Security Setup](ROADMAP.md#milestone-1-foundation--security-setup--completed) ✅
 
@@ -587,7 +672,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Progress Tracking by Roadmap Milestone
 
 ### ✅ Milestone 1: Foundation & Security Setup
-- **Status**: Completed (December 21, 2024)
+- **Status**: Completed (December 21, 2025)
 - **Version**: v1.0.0
 - **Completion**: 100%
 - **Key Achievements**:
@@ -601,8 +686,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Status**: Complete
 - **Version**: v1.1.0
 - **Completion**: 100%
-- **Started**: December 21, 2024
-- **Completed**: December 21, 2024
+- **Started**: December 21, 2025
+- **Completed**: December 21, 2025
 - **Key Achievements**:
   - All 4 parallel tracks completed
   - CREATE2 infrastructure deployed
@@ -672,7 +757,7 @@ This changelog is updated:
 - When security incidents occur
 - At the beginning of each month (progress summary)
 
-**Last Updated**: December 21, 2024
+**Last Updated**: December 21, 2025
 **Next Update**: January 15, 2025 (monthly progress check)
 
 ---

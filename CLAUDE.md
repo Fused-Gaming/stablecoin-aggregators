@@ -651,6 +651,61 @@ router.transferOwnership(MULTISIG_ADDRESS);
 
 ---
 
+## ⚠️ IMPORTANT: Documentation Update Checklist
+
+**When releasing a new version, ALWAYS update these 4 files:**
+
+1. **[VERSION.md](VERSION.md)**
+   - Update current version number and release date
+   - Add new version section with features, fixes, changes
+   - Update support policy with current version
+   - Update version timeline roadmap
+   - Update "Last Updated" date
+
+2. **[CHANGELOG.md](CHANGELOG.md)**
+   - Update current version reference at top
+   - Add new version section with date
+   - Document all Added, Fixed, Changed, Removed items
+   - Include migration notes if breaking changes
+   - Reference related PRs and issues
+
+3. **[ROADMAP.md](ROADMAP.md)**
+   - Update "Current Version" reference at top
+   - Mark completed milestones
+   - Update milestone statuses and dates
+   - Adjust timeline if needed
+
+4. **[README.md](README.md)**
+   - Update version badge
+   - Update feature list if new capabilities added
+   - Update installation/deployment instructions if changed
+
+**Additional files to consider:**
+- This file ([CLAUDE.md](CLAUDE.md)) if architecture changed
+- Contract documentation if interfaces changed
+- Deployment addresses if deployed to new networks
+
+**Why this matters:**
+- Users rely on accurate version information
+- Documentation drift causes confusion
+- Version tracking enables proper support
+- Changelog helps users understand what changed
+- Roadmap keeps stakeholders informed
+
+**Checklist Template:**
+```markdown
+Version Release Checklist:
+- [ ] Update VERSION.md (current version, new section, timeline)
+- [ ] Update CHANGELOG.md (version header, changes, migration notes)
+- [ ] Update ROADMAP.md (current version, milestone status)
+- [ ] Update README.md (version badge, features if needed)
+- [ ] Git tag: `git tag v1.x.x && git push --tags`
+- [ ] GitHub Release with changelog
+- [ ] Announce in relevant channels
+```
+
+---
+
 **Note to Future Developers**: This guide is maintained alongside the codebase. When making significant architectural changes, please update the relevant sections. Keep it practical and example-driven.
 
 **Built with ❤️ by Fused-Gaming using Claude Code**

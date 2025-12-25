@@ -1,16 +1,16 @@
 # Version Control
 
-## Current Version: v1.1.0
+## Current Version: v1.1.1
 
-**Release Date**: December 21, 2024
-**Status**: CREATE2 & Key Management Complete
-**Milestone**: [Milestone 2 - Deterministic Deployment & Key Management](ROADMAP.md#milestone-2-deterministic-deployment--key-management--in-progress)
+**Release Date**: December 24, 2025
+**Status**: OpenZeppelin v5 Migration & Developer Tooling
+**Milestone**: [Milestone 2 - Deterministic Deployment & Key Management](ROADMAP.md#milestone-2-deterministic-deployment--key-management--complete)
 
 ---
 
 ## Version History
 
-### v1.0.0 - Foundation Release (December 21, 2024)
+### v1.0.0 - Foundation Release (December 21, 2025)
 
 **Status**: ✅ Released
 
@@ -62,7 +62,7 @@
 
 ---
 
-### v1.1.0 - CREATE2 & Key Management (Released: December 21, 2024)
+### v1.1.0 - CREATE2 & Key Management (Released: December 21, 2025)
 
 **Status**: ✅ Released
 **Milestone**: [Milestone 2 - Deterministic Deployment & Key Management](ROADMAP.md#milestone-2-deterministic-deployment--key-management)
@@ -135,7 +135,47 @@
 
 ---
 
-### v1.2.0 - Testnet Validation (Target: Q1 2025)
+### v1.1.1 - OpenZeppelin v5 Migration & Developer Tooling (Released: December 24, 2025)
+
+**Status**: ✅ Released
+
+#### Features
+- **OpenZeppelin v5 Migration**: Updated all contracts for compatibility
+  - Added `Ownable(msg.sender)` to FeeCollector402 and Router402 constructors
+  - Replaced deprecated `safeApprove()` with `forceApprove()`
+  - Fixed CREATE2Factory variable shadowing warning
+
+- **Developer Documentation**: Comprehensive onboarding guide
+  - CLAUDE.md with complete project context
+  - Architecture decisions and rationale
+  - Common tasks and troubleshooting
+  - Testing and deployment procedures
+
+- **GitHub Actions Fix**: Corrected action.yml location
+  - Moved from `.github/workflows/actions.yml` to repo root `action.yml`
+  - Fixes workflow validation errors
+
+#### Bug Fixes
+- Fixed `DeploymentFailed` error naming conflict → `Create2DeploymentFailed`
+- Fixed OpenZeppelin v5 constructor compatibility issues
+- Fixed CREATE2Factory `hasCode()` return value shadowing
+
+#### Dependencies
+- Updated to OpenZeppelin Contracts v5.x
+- Regenerated package-lock.json and pnpm-lock.yaml
+
+#### Development
+- Cleaned up stale feature branches
+- Merged PR #29 (compilation fixes)
+- Closed stale PR #21 (superseded changes)
+- Deleted 3 merged remote branches
+
+#### Breaking Changes
+- None (backward compatible fixes only)
+
+---
+
+### v1.2.0 - Testnet Validation (Target: Q1 2026)
 
 **Status**: ⏳ Planned
 **Milestone**: [Milestone 3 - Testnet Deployment & Validation](ROADMAP.md#milestone-3-testnet-deployment--validation)
@@ -321,8 +361,8 @@ We follow [Semantic Versioning](https://semver.org/) (SemVer):
 ## Support Policy
 
 ### Active Support
-- **Current Version** (v1.0.0): Full support, active development
-- **Previous Minor** (N/A): Security updates only
+- **Current Version** (v1.1.1): Full support, active development
+- **Previous Minor** (v1.1.0): Security updates only
 
 ### End of Life
 - Versions older than 2 major releases are no longer supported
@@ -392,13 +432,15 @@ Current contracts are **not upgradeable** by design. Major updates require:
 ## Version Roadmap Timeline
 
 ```
-2024 Q4: v1.0.0 ✅
-2025 Q1: v1.1.0 → v1.2.0 → v1.3.0
-2025 Q2: v2.0.0 → v2.1.0
-2025 Q3: v3.0.0
-2025 Q4: v4.0.0
-2026 Q1: v5.0.0
-2026 Q2: v6.0.0
+2025 Q4: v1.0.0 ✅
+2025 Q4: v1.1.0 ✅
+2025 Q4: v1.1.1 ✅
+2026 Q1: v1.2.0 → v1.3.0
+2026 Q2: v2.0.0 → v2.1.0
+2026 Q3: v3.0.0
+2026 Q4: v4.0.0
+2027 Q1: v5.0.0
+2027 Q2: v6.0.0
 ```
 
 ---
@@ -412,7 +454,7 @@ Current contracts are **not upgradeable** by design. Major updates require:
 
 ---
 
-**Last Updated**: December 21, 2024
-**Next Review**: April 1, 2025
+**Last Updated**: December 24, 2025
+**Next Review**: April 1, 2026
 
 For detailed progress on current development, see [CHANGELOG.md](CHANGELOG.md).
