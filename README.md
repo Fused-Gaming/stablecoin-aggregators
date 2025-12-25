@@ -2,9 +2,11 @@
 
 Smart contracts for cross-chain stablecoin routing with x402 micropayments.
 
-**Version**: v1.1.1 | [Roadmap](ROADMAP.md) | [Changelog](CHANGELOG.md) | [Version Info](VERSION.md)
+**Version**: v1.2.0 | [Roadmap](ROADMAP.md) | [Changelog](CHANGELOG.md) | [Version Info](VERSION.md)
 
 **🚀 [Quickstart Deployment Guide](QUICKSTART_DEPLOYMENT.md)** - Deploy to Base Sepolia in 15 minutes
+
+**🔐 [Admin Dashboard](https://admin.vln.gg)** - Secure contract management (restricted access)
 
 **Built by Fused-Gaming**
 
@@ -20,6 +22,7 @@ This repository contains production-ready smart contracts for routing stablecoin
 
 ## Features
 
+### Smart Contracts
 - ✅ Cross-chain stablecoin routing (ETH, Base, TON, Monad)
 - ✅ Integrated x402 micropayment fees (0.2% default)
 - ✅ CREATE2 deterministic deployment (same address on all chains)
@@ -29,6 +32,19 @@ This repository contains production-ready smart contracts for routing stablecoin
 - ✅ Hardware wallet support (Ledger, Trezor)
 - ✅ Gas optimized (via IR compilation)
 - ✅ OpenZeppelin v5 security patterns
+
+### Web Platform
+- ✅ **admin.vln.gg** - Secure admin dashboard for contract management
+- 🔮 **402.vln.gg** - x402 Payment Gateway (HTTP 402 protocol) - Planned M5-M7
+- 🔮 **manage.vln.gg** - Internal management platform - Planned M3-M4
+- 🔮 **swap.vln.gg** - Stablecoin swap UI - Planned M8-M9
+
+### Security & Operations
+- ✅ Multi-layered admin security (environment auth, MFA, session management)
+- ✅ Bot protection (robots.txt, sitemap.xml)
+- ✅ Subdomain isolation for admin dashboard
+- ✅ Vercel Analytics integration
+- ✅ Multi-admin approval for critical operations
 
 ## Supported Chains
 
@@ -262,10 +278,28 @@ Audit planned for Q1 2025 after initial deployment and testing.
 
 ## Documentation
 
-Comprehensive documentation is available:
+### Core Documentation
 - [ROADMAP.md](ROADMAP.md) - Detailed development roadmap with security protocols
 - [VERSION.md](VERSION.md) - Version tracking and release history
 - [CHANGELOG.md](CHANGELOG.md) - Detailed changelog and progress tracking
+- [QUICKSTART_DEPLOYMENT.md](QUICKSTART_DEPLOYMENT.md) - 15-minute testnet deployment guide
+- [CLAUDE.md](CLAUDE.md) - Developer onboarding guide
+
+### Smart Contracts
+- [CREATE2_DEPLOYMENT.md](docs/CREATE2_DEPLOYMENT.md) - Deterministic deployment guide
+- [LEVEL1_TESTING_GUIDE.md](docs/LEVEL1_TESTING_GUIDE.md) - Level 1 testing procedures
+- [hardware-wallet-setup.md](docs/hardware-wallet-setup.md) - Hardware wallet integration
+
+### Web Platform
+- [ADMIN_SECURITY.md](402-vln-gg/docs/ADMIN_SECURITY.md) - Admin dashboard security architecture
+- [VERCEL_DEPLOYMENT.md](402-vln-gg/docs/VERCEL_DEPLOYMENT.md) - Vercel deployment guide
+- [PLATFORM_ARCHITECTURE.md](docs/web-platform/PLATFORM_ARCHITECTURE.md) - Overall platform design
+- [x402.md](docs/specifications/x402.md) - x402 payment protocol specification
+
+### Milestone Documentation
+- [M2_PARALLEL_DEVELOPMENT.md](docs/milestones/M2_PARALLEL_DEVELOPMENT.md) - Parallel development plan
+- [TRACK1_README.md](docs/tracks/TRACK1_README.md) - CREATE2 completion report
+- [TRACK2_README.md](docs/tracks/TRACK2_README.md) - Documentation completion report
 - [docs/overview.md](docs/overview.md) - System overview
 - [docs/architecture.md](docs/architecture.md) - Contract architecture
 - [docs/deployment.md](docs/deployment.md) - Deployment guide

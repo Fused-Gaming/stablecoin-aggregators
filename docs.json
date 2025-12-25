@@ -1,19 +1,50 @@
 {
   "name": "Stablecoin Aggregator Contracts",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "Smart contracts for cross-chain stablecoin routing with x402 micropayments",
   "repository": "Fused-Gaming/stablecoin-aggregators",
+  "web-platform": {
+    "admin": "https://admin.vln.gg",
+    "gateway": "https://402.vln.gg",
+    "manage": "https://manage.vln.gg",
+    "swap": "https://swap.vln.gg",
+    "vercel-deployment-guide": "402-vln-gg/docs/VERCEL_DEPLOYMENT.md"
+  },
   "documentation": {
     "quickstart": "QUICKSTART_DEPLOYMENT.md",
     "developer-guide": "CLAUDE.md",
     "overview": "docs/overview.md",
     "architecture": "docs/architecture.md",
-    "deployment": "docs/deployment.md",
+    "deployment": "docs/DEPLOYMENT.md",
     "api": "docs/api-reference.md",
     "security": "docs/security.md",
     "level1-testing": "docs/LEVEL1_TESTING_GUIDE.md",
     "create2-deployment": "docs/CREATE2_DEPLOYMENT.md",
-    "hardware-wallet": "docs/hardware-wallet-setup.md"
+    "hardware-wallet": "docs/hardware-wallet-setup.md",
+    "web-platform": {
+      "architecture": "docs/web-platform/PLATFORM_ARCHITECTURE.md",
+      "roadmap": "docs/web-platform/DEVELOPMENT_ROADMAP.md",
+      "discrepancy-analysis": "docs/web-platform/DISCREPANCY_ANALYSIS.md",
+      "setup-guide": "docs/web-platform/SETUP_GUIDE.md"
+    },
+    "milestones": {
+      "m2-parallel-development": "docs/milestones/M2_PARALLEL_DEVELOPMENT.md"
+    },
+    "tracks": {
+      "track1-completion": "docs/tracks/TRACK1_README.md",
+      "track2-completion": "docs/tracks/TRACK2_README.md"
+    },
+    "specifications": {
+      "x402-protocol": "docs/specifications/x402.md"
+    },
+    "admin": {
+      "security-architecture": "402-vln-gg/docs/ADMIN_SECURITY.md",
+      "vercel-deployment": "402-vln-gg/docs/VERCEL_DEPLOYMENT.md"
+    }
+  },
+  "analytics": {
+    "vercel-analytics": true,
+    "enabled-on": ["admin.vln.gg"]
   },
   "contracts": {
     "Router402": {

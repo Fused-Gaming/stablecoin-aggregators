@@ -1,196 +1,170 @@
-# Deployment Guide
+# Deployment Checklist for 402.vln.gg Contracts
 
-## Prerequisites
+## Pre-Deployment
 
-- Node.js v18 or higher
-- npm or yarn
-- Hardhat
-- Private key with funds for deployment
-- RPC endpoints for target networks
-- Etherscan/Basescan API keys for verification
+### Environment Setup
+- [ ] Create `.env` file from `.env.example`
+- [ ] Add PRIVATE_KEY (deployment wallet)
+- [ ] Add TREASURY_ADDRESS (multisig recommended)
+- [ ] Add RPC URLs (Alchemy/Infura)
+- [ ] Add API keys (Basescan/Etherscan)
+- [ ] Fund deployment wallet with ETH for gas
 
-## Installation
+### Code Review
+- [ ] Review all contract code
+- [ ] Run `npm install`
+- [ ] Run `npm run compile` successfully
+- [ ] Run `npm test` - all tests pass
+- [ ] Run `npm run coverage` - check coverage
+- [ ] Run `npm run gas-report` - review gas costs
 
-```bash
-# Clone the repository
-git clone https://github.com/Fused-Gaming/stablecoin-aggregators.git
-cd stablecoin-aggregators
+### Configuration
+- [ ] Verify treasury address is correct
+- [ ] Verify fee basis points (20 = 0.2%)
+- [ ] Verify token addresses for network
+- [ ] Verify bridge addresses for network
+- [ ] Verify daily volume limits
 
-# Install dependencies
-npm install
-```
+## Testnet Deployment (Base Sepolia)
 
-## Environment Setup
+### Deploy
+- [ ] Run `npm run deploy:base-sepolia`
+- [ ] Save deployment addresses
+- [ ] Verify contracts on Basescan Sepolia
+- [ ] Fund test wallet with USDC/USDT
 
-Create a `.env` file in the project root:
+### Configure
+- [ ] Call `setSupportedToken(USDC, true)`
+- [ ] Call `setSupportedToken(USDT, true)`
+- [ ] Call `setApprovedBridge(Socket, true)`
+- [ ] Verify all configurations
 
-```bash
-# Deployment
-PRIVATE_KEY=your_private_key_here
-TREASURY_ADDRESS=0x_your_multisig_here
+### Test on Testnet
+- [ ] Test small swap (10 USDC)
+- [ ] Test fee collection
+- [ ] Test pause/unpause
+- [ ] Test emergency functions
+- [ ] Monitor events in block explorer
+- [ ] Test with multiple users
+- [ ] Test daily volume limits
 
-# RPC URLs
-BASE_RPC_URL=https://mainnet.base.org
-ETH_RPC_URL=https://eth.llamarpc.com
+## Mainnet Deployment (Base)
 
-# API Keys (for contract verification)
-BASESCAN_API_KEY=your_basescan_key
-ETHERSCAN_API_KEY=your_etherscan_key
-```
+### Pre-flight Checks
+- [ ] All testnet tests passed
+- [ ] Code freeze (no changes from testnet)
+- [ ] Treasury multisig set up (2/3 recommended)
+- [ ] Deployment wallet has 0.05+ ETH
+- [ ] Double-check all addresses
 
-**Security Note**: Never commit `.env` files. Ensure `.env` is in your `.gitignore`.
+### Deploy Contracts
+- [ ] Run `npm run deploy:base`
+- [ ] IMMEDIATELY save all addresses
+- [ ] Transfer ownership to multisig
+- [ ] Verify contracts on Basescan
 
-## Compile Contracts
+### Configuration
+- [ ] Add USDC support
+- [ ] Add USDT support
+- [ ] Approve Socket router
+- [ ] Set initial limits conservatively
+- [ ] Test with $10 swap
 
-```bash
-npm run compile
-```
+### Security
+- [ ] Renounce direct ownership (use multisig)
+- [ ] Set up monitoring alerts
+- [ ] Document emergency procedures
+- [ ] Share addresses with team
+- [ ] Backup deployment info
 
-This will compile all contracts with IR optimization enabled.
+## Post-Deployment
 
-## Testing
+### Monitoring
+- [ ] Set up Tenderly for transaction monitoring
+- [ ] Create Dune dashboard for analytics
+- [ ] Monitor first 24 hours closely
+- [ ] Check gas costs vs estimates
+- [ ] Monitor fee collection
 
-Before deployment, run the full test suite:
+### Integration
+- [ ] Update frontend with addresses
+- [ ] Update API with addresses
+- [ ] Test end-to-end user flow
+- [ ] Update documentation
+- [ ] Announce deployment
 
-```bash
-# Run all tests
-npm test
+### Gradual Rollout
+- [ ] Week 1: Max $100 per swap
+- [ ] Week 2: Max $1,000 per swap
+- [ ] Week 3: Max $10,000 per swap
+- [ ] Week 4: Max $100,000 per swap
+- [ ] Month 2: Remove limits if stable
 
-# Run with gas reporting
-npm run gas-report
+## Emergency Procedures
 
-# Generate coverage report
-npm run coverage
-```
+### If Exploit Detected
+1. Call `setEmergencyPause(true)` immediately
+2. Call `pause()` for additional safety
+3. Investigate issue
+4. Do NOT withdraw funds until issue understood
+5. Coordinate with multisig owners
 
-## Deployment
+### If Funds Stuck
+1. Verify it's actually stuck (not in-flight)
+2. Get multisig approval
+3. Call `emergencyWithdraw(token, amount, recipient)`
+4. Document what happened
 
-### Testnet Deployment (Base Sepolia)
+### If Bridge Fails
+1. Temporarily disable bridge: `setApprovedBridge(bridge, false)`
+2. Communicate to users
+3. Monitor for resolution
+4. Re-enable when safe
 
-```bash
-npm run deploy:base-sepolia
-```
-
-This will deploy all three contracts:
-1. Treasury402
-2. FeeCollector402
-3. Router402
-
-Save the deployed contract addresses for verification.
-
-### Mainnet Deployment (Base)
-
-```bash
-npm run deploy:base
-```
-
-### Ethereum Mainnet Deployment
-
-```bash
-npm run deploy:ethereum
-```
-
-## Contract Verification
-
-After deployment, verify contracts on block explorers:
-
-```bash
-# Verify Router402
-npx hardhat verify --network base <ROUTER_ADDRESS> <TREASURY_ADDRESS>
-
-# Verify FeeCollector402
-npx hardhat verify --network base <FEE_COLLECTOR_ADDRESS> <TREASURY_ADDRESS>
-
-# Verify Treasury402
-npx hardhat verify --network base <TREASURY_ADDRESS> <SIGNER1> <SIGNER2> <SIGNER3>
-```
-
-## Post-Deployment Configuration
-
-### 1. Configure Approved Bridges
-
-```bash
-npx hardhat run scripts/configure-bridges.ts --network base
-```
-
-Or manually:
-```solidity
-router.addApprovedBridge(socketRouterAddress);
-```
-
-### 2. Configure Fee Parameters
-
-```solidity
-router.setFeeBps(20); // 0.2%
-router.setMaxSwapAmount(1000000e6); // 1M USDC
-router.setMinSwapAmount(1e6); // 1 USDC
-```
-
-### 3. Configure Daily Limits
-
-```solidity
-router.setDailyLimit(100000e6); // 100K USDC per day per user
-```
-
-### 4. Test Initial Swap
-
-Run a small test swap to verify deployment:
+## Verification Commands
 
 ```bash
-npx hardhat run scripts/test-swap.ts --network base
+# Router402
+npx hardhat verify --network base <ROUTER_ADDRESS> <TREASURY> <FEE_BPS>
+
+# FeeCollector402
+npx hardhat verify --network base <FEE_COLLECTOR_ADDRESS> <TREASURY> <USDC> <BASE_FEE>
+
+# Treasury402
+npx hardhat verify --network base <TREASURY_ADDRESS> <OWNER1> <OWNER2> <OWNER3>
 ```
 
-## Deployment Checklist
+## Deployment Addresses
 
-- [ ] Environment variables configured
-- [ ] Contracts compiled successfully
-- [ ] All tests passing
-- [ ] Treasury multisig addresses ready
-- [ ] Sufficient funds for deployment gas
-- [ ] Deploy contracts
-- [ ] Verify contracts on block explorer
-- [ ] Configure approved bridges
-- [ ] Set fee parameters
-- [ ] Set volume limits
-- [ ] Test small swap
-- [ ] Monitor initial transactions
-- [ ] Update frontend with new addresses
-
-## Network-Specific Details
+### Base Sepolia (Testnet)
+- Router402: `TBD`
+- FeeCollector402: `TBD`
+- Treasury402: `TBD`
+- Deployed: `TBD`
 
 ### Base Mainnet
-- Chain ID: 8453
-- Socket Router: `0x3a23F943181408EAC424116Af7b7790c94Cb97a5`
-- USDC: `0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913`
-- USDT: `0xfde4C96c8593536E31F229EA8f37b2ADa2699bb2`
+- Router402: `TBD`
+- FeeCollector402: `TBD`
+- Treasury402: `TBD`
+- Deployed: `TBD`
 
-### Ethereum Mainnet
-- Chain ID: 1
-- USDC: `0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48`
-- USDT: `0xdAC17F958D2ee523a2206206994597C13D831ec7`
+## Contact Info
 
-## Troubleshooting
+- Emergency Contact: [your telegram/phone]
+- Team Lead: [email]
+- Multisig Signers:
+  1. [name] - [contact]
+  2. [name] - [contact]
+  3. [name] - [contact]
 
-### Deployment Fails
-- Check private key has sufficient funds
-- Verify RPC endpoint is accessible
-- Ensure gas price is reasonable
+## Audit Status
 
-### Verification Fails
-- Check API key is correct
-- Wait a few minutes after deployment
-- Verify constructor arguments match deployment
+- [ ] Internal review complete
+- [ ] External audit scheduled
+- [ ] Audit findings addressed
+- [ ] Final audit report received
+- [ ] Public audit published
 
-### Contract Not Working
-- Check contract is not paused
-- Verify approved bridges are configured
-- Ensure token approvals are set
+---
 
-## Security Recommendations
-
-1. Use a hardware wallet for mainnet deployments
-2. Deploy from a fresh, secure environment
-3. Verify all contract addresses before configuration
-4. Start with conservative limits
-5. Monitor transactions closely after launch
-6. Have emergency pause procedures ready
+**Remember**: Take your time. Better to delay than deploy with issues.

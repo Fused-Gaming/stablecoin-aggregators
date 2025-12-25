@@ -5,26 +5,141 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-**Current Version**: v1.1.1 (see [VERSION.md](VERSION.md))
+**Current Version**: v1.2.0 (see [VERSION.md](VERSION.md))
 **Roadmap Progress**: See [ROADMAP.md](ROADMAP.md) for milestone tracking
 
 ---
 
 ## [Unreleased]
 
-### In Progress (v1.2.0 - Milestone 3)
+### In Progress (v1.3.0 - Milestone 3)
 - **Ready to Deploy**: Base Sepolia testnet deployment (see [QUICKSTART_DEPLOYMENT.md](QUICKSTART_DEPLOYMENT.md))
 - Ethereum Sepolia testnet deployment (pending Base deployment)
+- Admin dashboard implementation (authentication, routes, UI)
 - Cross-chain validation testing
 - Load testing suite
 - Security incident simulation framework
 - Deployment address documentation
 
-### Planned (v1.3.0 - Milestone 4)
+### Planned (v1.4.0 - Milestone 4)
 - External security audit
 - Remediation of findings
 - Bug bounty program
 - Public audit report
+
+---
+
+## [1.2.0] - 2025-12-24
+
+**Milestone**: Milestone 2 Maintenance & Web Platform Foundation ✅
+
+### Added
+
+#### Admin Dashboard Security Architecture
+- **ADMIN_SECURITY.md**: Comprehensive 382-line security documentation
+  - Multi-layered security architecture (4 layers)
+  - Environment-based authentication (bcrypt cost 12, 256-bit JWT secrets)
+  - Multi-factor authentication (TOTP) requirement
+  - Session management (15min access tokens, 7-day refresh tokens)
+  - IP whitelisting and rate limiting specifications
+  - Audit logging (2-year retention, immutable append-only)
+
+- **Administrative Flows Documented** (7 flows):
+  - Contract configuration
+  - Emergency pause
+  - Treasury update (requires 2 admin approvals)
+  - Fee adjustment
+  - Token/bridge management
+  - Deployment monitoring
+  - Audit log review
+
+- **Permission Matrix**: Defines required permissions, password confirmation, MFA, and multi-admin approval for all operations
+
+#### Subdomain Architecture
+- **VERCEL_DEPLOYMENT.md**: Complete deployment guide for 4-subdomain ecosystem
+  - `admin.vln.gg` - Secure admin dashboard (deployed)
+  - `402.vln.gg` - x402 Payment Gateway (planned M5-M7)
+  - `manage.vln.gg` - Internal management platform (planned M3-M4)
+  - `swap.vln.gg` - Stablecoin aggregator UI (planned M8-M9)
+
+- **Subdomain Separation**: Admin dashboard intentionally isolated on separate subdomain for security
+
+#### Vercel Analytics Integration
+- Installed `@vercel/analytics` package (v1.x)
+- Added `<Analytics />` component to root layout
+- Real-time traffic and performance monitoring enabled
+- Core Web Vitals tracking
+
+#### Bot Protection & SEO Isolation
+- **robots.txt**: Blocks `/admin` routes from all crawlers
+  - Blocks AI scrapers (CCBot, GPTBot, Claude-Web, Google-Extended, anthropic-ai)
+  - Allows public routes (`/`, `/swap`)
+  - References sitemap.xml
+
+- **sitemap.xml**: Only includes public routes
+  - Homepage: `https://402.vln.gg/` (priority 1.0)
+  - Swap page: `https://402.vln.gg/swap` (priority 0.8)
+  - Admin routes intentionally excluded
+
+#### Documentation Organization
+- Reorganized all documentation into structured folders:
+  - `docs/web-platform/` - Platform architecture, roadmap, discrepancy analysis, setup guide
+  - `docs/milestones/` - M2 parallel development completion
+  - `docs/tracks/` - Track 1 (CREATE2) and Track 2 (Documentation) completion reports
+  - `docs/specifications/` - x402 protocol specification
+  - `docs/DEPLOYMENT.md` - Deployment checklist (moved from root)
+
+- **docs.json**: Updated with new structure
+  - Added web-platform section (4 documents)
+  - Added milestones section
+  - Added tracks section
+  - Added specifications section
+  - Added admin security documentation reference
+
+#### Metadata Updates
+- Updated Next.js app metadata:
+  - Title: "Admin Dashboard - 402.vln.gg"
+  - Description: "Secure admin dashboard for managing stablecoin aggregator smart contracts"
+
+### Changed
+- **ADMIN_SECURITY.md**: Updated to reflect dedicated subdomain architecture
+  - Changed from `/admin` route to `admin.vln.gg` subdomain
+  - Updated all route references (removed `/admin` prefix)
+  - Added subdomain separation rationale
+
+### Deployment
+- ✅ Deployed to Vercel: https://402-vln-gg.vercel.app
+- ✅ Vercel project linked to GitHub repository
+- ⏳ Custom domain `admin.vln.gg` configuration pending
+- Production-ready security headers documented
+- Environment variable management guide created
+
+### Security
+- Comprehensive security architecture designed (not yet implemented)
+- Bot protection deployed (robots.txt, sitemap.xml)
+- Subdomain isolation strategy documented
+- Multi-admin approval workflows defined for critical operations
+  - Treasury updates: Requires 2 admin approvals
+  - Emergency withdrawals: Requires 3 admin approvals
+
+### Documentation
+- **New Files**:
+  - `402-vln-gg/docs/ADMIN_SECURITY.md` (382 lines)
+  - `402-vln-gg/docs/VERCEL_DEPLOYMENT.md` (450+ lines)
+  - `402-vln-gg/public/robots.txt`
+  - `402-vln-gg/public/sitemap.xml`
+
+- **Updated Files**:
+  - `docs.json` - New documentation structure
+  - `VERSION.md` - Added v1.2.0 release notes
+  - `CHANGELOG.md` - This file
+  - `README.md` - Updated with subdomain architecture
+  - `402-vln-gg/src/app/layout.tsx` - Added analytics, updated metadata
+
+### Migration Notes
+- No breaking changes
+- No contract changes (purely documentation and infrastructure)
+- Vercel Analytics requires no additional configuration (works out of the box)
 
 ---
 
