@@ -237,27 +237,27 @@ await tx.wait();
 
 ## Project Status & Roadmap
 
-**Current Milestone**: Foundation & Security Setup ✅ Completed
-**Next Milestone**: CREATE2 & Key Management 🔄 In Progress
+**Current Milestone**: CREATE2 & Key Management ✅ Completed (v1.2.0)
+**Next Milestone**: Testnet Deployment ⏳ Starting Q1 2026
 
 See [ROADMAP.md](ROADMAP.md) for detailed milestone planning including:
-- CREATE2 deterministic deployment strategy
-- Multi-level key management hierarchy
-- Security protocols and key ceremonies
-- Testnet validation procedures
+- CREATE2 deterministic deployment strategy ✅
+- Multi-level key management hierarchy ✅
+- Admin dashboard architecture ✅
+- Testnet validation procedures (next)
 - Professional security audit plans
 - Mainnet deployment roadmap
 - Governance and decentralization path
 
 **Quick Milestones**:
-- ✅ M1: Foundation & Security Setup (v1.0.0) - Completed
-- 🔄 M2: CREATE2 & Key Management (v1.1.0) - In Progress
-- ⏳ M3: Testnet Deployment (v1.2.0) - Q1 2025
-- ⏳ M4: Security Audit (v1.3.0) - Q1 2025
-- ⏳ M5: Base Mainnet Launch (v2.0.0) - Q2 2025
-- ⏳ M6: Ethereum Mainnet (v2.1.0) - Q2 2025
-- ⏳ M7: Multi-Chain Expansion (v3.0.0) - Q3 2025
-- ⏳ M8: Governance & DAO (v4.0.0) - Q4 2025
+- ✅ M1: Foundation & Security Setup (v1.0.0) - Completed Dec 2025
+- ✅ M2: CREATE2 & Key Management + Admin Dashboard (v1.1.x-v1.2.0) - Completed Dec 2025
+- ⏳ M3: Testnet Deployment (v1.3.0) - Q1 2026
+- ⏳ M4: Security Audit (v1.4.0) - Q1 2026
+- ⏳ M5: Base Mainnet Launch (v2.0.0) - Q2 2026
+- ⏳ M6: Ethereum Mainnet (v2.1.0) - Q2 2026
+- ⏳ M7: Multi-Chain Expansion (v3.0.0) - Q3 2026
+- ⏳ M8: Governance & DAO (v4.0.0) - Q4 2026
 
 [View Full Roadmap →](ROADMAP.md)
 
