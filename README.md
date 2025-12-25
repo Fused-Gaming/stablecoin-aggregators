@@ -4,6 +4,8 @@ Smart contracts for cross-chain stablecoin routing with x402 micropayments.
 
 **Version**: v1.1.1 | [Roadmap](ROADMAP.md) | [Changelog](CHANGELOG.md) | [Version Info](VERSION.md)
 
+**🚀 [Quickstart Deployment Guide](QUICKSTART_DEPLOYMENT.md)** - Deploy to Base Sepolia in 15 minutes
+
 **Built by Fused-Gaming**
 
 ## Overview
@@ -14,17 +16,19 @@ This repository contains production-ready smart contracts for routing stablecoin
 
 - **Router402.sol** - Main routing contract with fee collection and bridge integration
 - **FeeCollector402.sol** - Simple fee collector for off-chain routing
-- **Treasury402.sol** - 2/3 multisig treasury for fee management
+- **CREATE2Factory.sol** - Deterministic deployment factory for consistent cross-chain addresses
 
 ## Features
 
 - ✅ Cross-chain stablecoin routing (ETH, Base, TON, Monad)
 - ✅ Integrated x402 micropayment fees (0.2% default)
+- ✅ CREATE2 deterministic deployment (same address on all chains)
 - ✅ Socket API & LayerZero integration
 - ✅ Daily volume limits (anti-abuse)
 - ✅ Emergency pause functionality
-- ✅ Multisig treasury
+- ✅ Hardware wallet support (Ledger, Trezor)
 - ✅ Gas optimized (via IR compilation)
+- ✅ OpenZeppelin v5 security patterns
 
 ## Supported Chains
 
@@ -34,10 +38,24 @@ This repository contains production-ready smart contracts for routing stablecoin
 - Monad (coming Q1 2025)
 - Solana
 
-## Installation
+## Quick Start
+
+### For Development & Testing
+
+See [**QUICKSTART_DEPLOYMENT.md**](QUICKSTART_DEPLOYMENT.md) for a complete step-by-step guide to deploy on Base Sepolia testnet in 15-20 minutes.
+
+### Installation
 
 ```bash
+# Clone repository
+git clone https://github.com/Fused-Gaming/stablecoin-aggregators.git
+cd stablecoin-aggregators
+
+# Install dependencies
 npm install
+
+# Compile contracts
+npm run compile
 ```
 
 ## Configuration
@@ -60,22 +78,34 @@ ETHERSCAN_API_KEY=your_etherscan_key
 
 ## Deployment
 
-### Testnet (Base Sepolia)
+### Quick Deployment (Recommended)
+
+**Testnet (Base Sepolia)** - Use the automated Level 1 workflow:
 
 ```bash
-npm run deploy:base-sepolia
+# Follow the quickstart guide for detailed instructions
+npx hardhat run scripts/test-level1-workflow.ts --network base-sepolia
 ```
 
-### Mainnet (Base)
+See [**QUICKSTART_DEPLOYMENT.md**](QUICKSTART_DEPLOYMENT.md) for complete deployment instructions.
+
+### Individual Contract Deployment
 
 ```bash
-npm run deploy:base
+# Deploy with CREATE2 for deterministic addresses
+npx hardhat run scripts/deploy-create2.ts --network base-sepolia
+
+# Deploy with hardware wallet (Ledger/Trezor)
+npx hardhat run scripts/deploy-hardware-wallet.ts --network base-sepolia
+
+# Traditional deployment
+npx hardhat run scripts/deploy.ts --network base-sepolia
 ```
 
 ### Verify Contracts
 
 ```bash
-npx hardhat verify --network base <CONTRACT_ADDRESS> <CONSTRUCTOR_ARGS>
+npx hardhat verify --network base-sepolia <CONTRACT_ADDRESS> <CONSTRUCTOR_ARGS>
 ```
 
 ## Testing

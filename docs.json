@@ -1,14 +1,19 @@
 {
   "name": "Stablecoin Aggregator Contracts",
-  "version": "1.0.0",
+  "version": "1.1.1",
   "description": "Smart contracts for cross-chain stablecoin routing with x402 micropayments",
   "repository": "Fused-Gaming/stablecoin-aggregators",
   "documentation": {
+    "quickstart": "QUICKSTART_DEPLOYMENT.md",
+    "developer-guide": "CLAUDE.md",
     "overview": "docs/overview.md",
     "architecture": "docs/architecture.md",
     "deployment": "docs/deployment.md",
     "api": "docs/api-reference.md",
-    "security": "docs/security.md"
+    "security": "docs/security.md",
+    "level1-testing": "docs/LEVEL1_TESTING_GUIDE.md",
+    "create2-deployment": "docs/CREATE2_DEPLOYMENT.md",
+    "hardware-wallet": "docs/hardware-wallet-setup.md"
   },
   "contracts": {
     "Router402": {
@@ -31,32 +36,61 @@
         "payCustomFee()"
       ]
     },
-    "Treasury402": {
-      "path": "contracts/Treasury402.sol",
-      "description": "2/3 multisig treasury for fee management",
+    "CREATE2Factory": {
+      "path": "contracts/CREATE2Factory.sol",
+      "description": "Deterministic contract deployment factory using CREATE2",
       "functions": [
-        "approveWithdrawal()"
+        "deploy()",
+        "deploySafe()",
+        "computeAddress()",
+        "hasCode()"
       ]
     }
   },
   "networks": {
+    "base-sepolia": {
+      "chainId": 84532,
+      "name": "Base Sepolia (Testnet)",
+      "tokens": {
+        "USDC": "0x036CbD53842c5426634e7929541eC2318f3dCF7e",
+        "USDT": "0xf08A50178dfcDe18524640EA6618a1f965821715"
+      },
+      "bridges": {
+        "Socket": "0x3a23F943181408EAC424116Af7b7790c94Cb97a5"
+      },
+      "deployments": {
+        "Router402": "Not yet deployed",
+        "FeeCollector402": "Not yet deployed",
+        "CREATE2Factory": "Not yet deployed"
+      }
+    },
     "ethereum": {
       "chainId": 1,
       "name": "Ethereum Mainnet",
       "tokens": {
         "USDC": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
         "USDT": "0xdAC17F958D2ee523a2206206994597C13D831ec7"
+      },
+      "deployments": {
+        "Router402": "Not yet deployed",
+        "FeeCollector402": "Not yet deployed",
+        "CREATE2Factory": "Not yet deployed"
       }
     },
     "base": {
       "chainId": 8453,
-      "name": "Base",
+      "name": "Base Mainnet",
       "tokens": {
         "USDC": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
         "USDT": "0xfde4C96c8593536E31F229EA8f37b2ADa2699bb2"
       },
       "bridges": {
         "Socket": "0x3a23F943181408EAC424116Af7b7790c94Cb97a5"
+      },
+      "deployments": {
+        "Router402": "Not yet deployed",
+        "FeeCollector402": "Not yet deployed",
+        "CREATE2Factory": "Not yet deployed"
       }
     }
   },

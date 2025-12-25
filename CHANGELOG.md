@@ -13,11 +13,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### In Progress (v1.2.0 - Milestone 3)
-- Base Sepolia testnet deployment
-- Ethereum Sepolia testnet deployment
+- **Ready to Deploy**: Base Sepolia testnet deployment (see [QUICKSTART_DEPLOYMENT.md](QUICKSTART_DEPLOYMENT.md))
+- Ethereum Sepolia testnet deployment (pending Base deployment)
 - Cross-chain validation testing
 - Load testing suite
 - Security incident simulation framework
+- Deployment address documentation
 
 ### Planned (v1.3.0 - Milestone 4)
 - External security audit
@@ -43,6 +44,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Integration points (frontend, bridges, hardware wallets)
   - Security patterns and testing strategy
   - Deployment procedures (testnet & mainnet)
+  - **Documentation update checklist** to prevent version drift
+
+- **QUICKSTART_DEPLOYMENT.md**: Step-by-step Level 1 testnet deployment guide
+  - Prerequisites and environment setup
+  - Complete .env configuration example
+  - Automated deployment workflow
+  - Verification and testing procedures
+  - Troubleshooting common issues
+  - 15-20 minute deployment time
+
+- **docs.json**: Project metadata and documentation index
+  - Updated to v1.1.1
+  - Added CREATE2Factory contract documentation
+  - Added Base Sepolia network configuration
+  - Added deployment status tracking
+  - Added quickstart and developer guide references
 
 #### GitHub Actions
 - **action.yml**: Moved Telegram notification action to correct location
@@ -83,6 +100,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `docs/m2-track2-procedures` (merged)
   - `claude/setup-m2-milestone-iP7gk` (stale)
   - `claude/hardware-wallet-cosigners-AHfuM` (merged)
+- Deleted 5 local feature branches:
+  - `feat/m2-track1-create2-factory` (merged to master)
+  - `feat/m2-track3-hardware-wallet` (merged to master)
+  - `feat/m2-track4-multisig-setup` (merged to master)
+  - Plus cleanup of other stale branches
 
 ### Development
 

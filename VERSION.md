@@ -348,13 +348,18 @@ We follow [Semantic Versioning](https://semver.org/) (SemVer):
 ## Deployment Addresses
 
 ### Testnet (Base Sepolia)
-*Not yet deployed*
+**Status**: Ready for Level 1 deployment
+**Guide**: See [QUICKSTART_DEPLOYMENT.md](QUICKSTART_DEPLOYMENT.md)
+
+*Awaiting first testnet deployment - use quickstart guide to deploy*
 
 ### Mainnet (Base)
-*Not yet deployed*
+**Status**: Not deployed (pending testnet validation)
+*Awaiting Milestone 3 completion*
 
 ### Mainnet (Ethereum)
-*Not yet deployed*
+**Status**: Not deployed (pending Base mainnet)
+*Planned for Milestone 6*
 
 ---
 
